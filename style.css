@@ -1,79 +1,85 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    color: #333;
-    background-color: #f4f4f4;
+    color: #2e2e2e;
+    background-color: #f0f0f0;
 }
 
 header {
     text-align: center;
-    padding: 50px;
-    background-color: #282c34;
-    color: white;
+    padding: 100px 20px;
+    background-color: #20232a;
+    color: #61dafb;
 }
 
 header h1 {
-    font-size: 2.5em;
+    font-size: 3em;
     margin-bottom: 10px;
 }
 
-header .welcome {
-    font-size: 2em;
-    font-weight: bold;
-    margin-top: 20px;
-    color: #ff6600;
-}
-
-header .intro {
+header .quote {
     font-style: italic;
-    font-size: 1.2em;
-    margin-top: 20px;
-    color: #ddd;
-}
-
-header .warning {
-    font-size: 1em;
-    margin-top: 20px;
-    color: #ffcc00;
+    font-size: 1.5em;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #ffffff;
 }
 
 .projects {
     padding: 50px;
     background-color: #ffffff;
+    text-align: center;
+}
+
+.projects h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #20232a;
 }
 
 .project {
     display: flex;
+    justify-content: center;
     align-items: center;
     margin-bottom: 30px;
+    background-color: #e6e6e6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .project img {
     max-width: 200px;
     margin-right: 20px;
+    border-radius: 10px;
+}
+
+.project-details {
+    max-width: 500px;
 }
 
 .project-details h3 {
-    margin-top: 0;
-    font-size: 1.5em;
-    color: #ff6600;
+    font-size: 1.8em;
+    margin: 0;
+    color: #20232a;
 }
 
 .project-details p {
-    color: #666;
+    font-size: 1.2em;
+    color: #2e2e2e;
 }
 
 .about-me {
     padding: 50px;
-    background-color: #eaeaea;
+    background-color: #20232a;
+    color: #ffffff;
     text-align: center;
 }
 
 .about-me h2 {
+    font-size: 2.5em;
     margin-bottom: 20px;
-    font-size: 2em;
-    color: #282c34;
 }
 
 .about-me .profile-pic {
@@ -92,9 +98,5 @@ footer {
 footer .social-media img {
     width: 30px;
     margin: 0 10px;
-}
-
-footer p {
-    margin-top: 20px;
-    font-size: 1em;
+    filter: brightness(0) invert(1);
 }
