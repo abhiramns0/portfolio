@@ -18,19 +18,29 @@ header h1 {
     margin-bottom: 10px;
 }
 
-header .quote {
+header .welcome {
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #ff6600;
+}
+
+header .intro {
     font-style: italic;
     font-size: 1.2em;
+    margin-top: 20px;
+    color: #ddd;
+}
+
+header .warning {
+    font-size: 1em;
+    margin-top: 20px;
+    color: #ffcc00;
 }
 
 .projects {
     padding: 50px;
     background-color: #ffffff;
-}
-
-.projects h2 {
-    text-align: center;
-    margin-bottom: 30px;
 }
 
 .project {
@@ -47,6 +57,11 @@ header .quote {
 .project-details h3 {
     margin-top: 0;
     font-size: 1.5em;
+    color: #ff6600;
+}
+
+.project-details p {
+    color: #666;
 }
 
 .about-me {
@@ -57,6 +72,8 @@ header .quote {
 
 .about-me h2 {
     margin-bottom: 20px;
+    font-size: 2em;
+    color: #282c34;
 }
 
 .about-me .profile-pic {
@@ -75,4 +92,9 @@ footer {
 footer .social-media img {
     width: 30px;
     margin: 0 10px;
+}
+
+footer p {
+    margin-top: 20px;
+    font-size: 1em;
 }
