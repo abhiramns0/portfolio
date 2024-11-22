@@ -3,78 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhiram N S - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Abhiram's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: white;
+            color: #4E4E4E;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            margin-top: 50px;
+            font-size: 24px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #4E4E4E;
+        }
+
+        .hero-text {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .hero-text p {
+            font-size: 24px;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 100px auto;
+        }
+
+        .project-container {
+            width: 1450px;
+            height: 650px;
+            background-color: #F4F4F4;
+            border-radius: 100px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .project-image {
+            width: 546px;
+            height: 427px;
+            object-fit: cover;
+        }
+
+        .project-description {
+            padding: 50px;
+        }
+
+        .project-description h2 {
+            font-size: 40px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .project-description p {
+            font-size: 24px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="intro-container">
-            <h1>Hi, I am Abhiram N S</h1>
-            <p class="quote">"I design intuitive experiences that seamlessly connect user needs with the magic of technology, driven by curiosity and a passion for innovation."</p>
-        </div>
-    </header>
+    <nav class="navbar">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#resume">Resume</a>
+    </nav>
 
-    <section class="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <img src="systemdesign.png" alt="System Design for Rural India">
-            <div class="project-details">
-                <h3>System Design for Rural India</h3>
-                <p>Connecting the rural commerce.</p>
-                <a href="https://example.com/project1" target="_blank" class="view-project-btn">View Project</a>
-            </div>
-        </div>
-        <div class="project">
-            <img src="chordex.png" alt="Chorded Keyboard for Malayalam">
-            <div class="project-details">
-                <h3>Chorded Keyboard for Indian Languages</h3>
-                <p>Recommended by 9 out of 10 users.</p>
-                <a href="https://example.com/project2" target="_blank" class="view-project-btn">View Project</a>
-            </div>
-        </div>
-        <div class="project">
-            <img src="anva.png" alt="Gesture-Based Swarm Robot Control in VR">
-            <div class="project-details">
-                <h3>Gesture-Based Swarm Robot Control in VR</h3>
-                <p>A Non-Verbal Approach.</p>
-                <a href="https://example.com/project3" target="_blank" class="view-project-btn">View Project</a>
-            </div>
-        </div>
-        <div class="project">
-            <img src="monobike.jpg" alt="Monobike for the Adventurous">
-            <div class="project-details">
-                <h3>Monobike for the Adventurous</h3>
-                <p>It's all about the user, isn’t it?</p>
-                <a href="https://example.com/project4" target="_blank" class="view-project-btn">View Project</a>
-            </div>
-        </div>
-        <div class="project">
-            <img src="modulartoolbox.jpg" alt="Modular Toolbox for Mechanic">
-            <div class="project-details">
-                <h3>Modular Toolbox for Mechanic</h3>
-                <p>It’s just too fast!</p>
-                <a href="https://example.com/project5" target="_blank" class="view-project-btn">View Project</a>
-            </div>
-        </div>
-    </section>
+    <div class="hero-text">
+        <h1>Hi, I am Abhiram</h1>
+        <p>I design intuitive experiences that seamlessly connect user needs with the magic of technology, driven by curiosity and a passion for innovation.</p>
+    </div>
 
-    <section class="about-me">
-        <h2>About Me</h2>
-        <img src="yourphoto.jpg" alt="Your Photo" class="profile-pic">
-        <p>Just a wonderer wandering around...</p>
-    </section>
-
-    <footer>
-        <div class="social-media">
-            <a href="https://www.linkedin.com/in/abhiramns06" target="_blank">
-                <img src="linkedin.png" alt="LinkedIn">
-            </a>
-            <a href="https://github.com/abhiramns06" target="_blank">
-                <img src="github.png" alt="GitHub">
-            </a>
+    <div class="project-container">
+        <a href="YOUR_PROJECT_LINK_HERE" target="_blank">
+            <img src="YOUR_IMAGE_PATH_HERE" alt="Grama Project" class="project-image">
+        </a>
+        <div class="project-description">
+            <h2>Grama: A one stop for rural retail</h2>
+            <p>Grama is a design solution aimed at empowering rural commerce by connecting shopkeepers, customers, suppliers, and delivery agents through a unified platform. By addressing inventory management, pricing transparency, and credit systems, Grama fosters trust, enhances efficiency, and strengthens community bonds in the heart of rural India.</p>
         </div>
-        <p>&copy; 2024 Abhiram N S</p>
-    </footer>
+    </div>
 </body>
 </html>
