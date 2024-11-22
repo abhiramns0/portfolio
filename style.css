@@ -1,29 +1,26 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    color: #2e2e2e;
-    background-color: #f0f0f0;
+    color: #333;
+    background-color: #f4f4f4;
 }
 
 header {
     text-align: center;
-    padding: 100px 20px;
+    padding: 50px;
     background-color: #20232a;
     color: #61dafb;
 }
 
 header h1 {
     font-size: 3em;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 header .quote {
     font-style: italic;
     font-size: 1.5em;
-    max-width: 800px;
-    margin: 0 auto;
-    color: #ffffff;
 }
 
 .projects {
@@ -35,51 +32,69 @@ header .quote {
 .projects h2 {
     font-size: 2.5em;
     margin-bottom: 30px;
-    color: #20232a;
 }
 
 .project {
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
-    background-color: #e6e6e6;
+    justify-content: center;
+    margin-bottom: 40px;
     padding: 20px;
+    background: #f9f9f9;
     border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .project img {
-    max-width: 200px;
+    max-width: 250px; /* Enlarged the image */
+    height: auto;
     margin-right: 20px;
     border-radius: 10px;
 }
 
 .project-details {
     max-width: 500px;
+    text-align: left;
 }
 
 .project-details h3 {
+    margin-top: 0;
     font-size: 1.8em;
-    margin: 0;
     color: #20232a;
 }
 
 .project-details p {
     font-size: 1.2em;
-    color: #2e2e2e;
+    margin: 10px 0;
+}
+
+.view-project-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 1em;
+    color: #ffffff;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.view-project-btn:hover {
+    background-color: #20232a;
+    color: #ffffff;
 }
 
 .about-me {
     padding: 50px;
-    background-color: #20232a;
-    color: #ffffff;
+    background-color: #eaeaea;
     text-align: center;
 }
 
 .about-me h2 {
-    font-size: 2.5em;
     margin-bottom: 20px;
+    font-size: 2.5em;
 }
 
 .about-me .profile-pic {
@@ -90,9 +105,9 @@ header .quote {
 
 footer {
     padding: 20px;
-    text-align: center;
     background-color: #282c34;
     color: white;
+    text-align: center;
 }
 
 footer .social-media img {
