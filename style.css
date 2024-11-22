@@ -1,131 +1,69 @@
-/* General styles */
 body {
     font-family: 'Poppins', sans-serif;
+    background-color: white;
+    color: #4E4E4E;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    text-align: center;
-}
-
-header {
-    background-color: #20232a;
-    color: #ffffff;
-    padding: 50px 20px;
-    text-align: center;
-    position: relative;
-}
-
-header .intro-container {
-    display: inline-block;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-    width: fit-content;
-}
-
-header h1 {
-    font-size: 2.8em;
-    margin-bottom: 10px;
-}
-
-header .quote {
-    font-size: 1.5em;
-    font-style: italic;
-    margin: 0;
-}
-
-/* Projects section */
-.projects {
-    background-color: #ffffff;
-    padding: 50px 20px;
-    text-align: center;
-}
-
-.projects h2 {
-    font-size: 2.5em;
-    margin-bottom: 40px;
-}
-
-.project {
     display: flex;
+    flex-direction: column;
     align-items: center;
+}
+
+.navbar {
+    display: flex;
     justify-content: center;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    gap: 100px;
+    margin-top: 50px;
+    font-size: 24px;
 }
 
-.project img {
-    max-width: 200px;
-    height: auto;
-    margin-right: 20px;
-    border-radius: 10px;
-}
-
-.project-details {
-    max-width: 600px;
-    text-align: left;
-}
-
-.project-details h3 {
-    margin: 0;
-    font-size: 1.8em;
-    color: #20232a;
-}
-
-.project-details p {
-    margin: 10px 0;
-    font-size: 1.2em;
-}
-
-.view-project-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 10px;
-    background-color: #61dafb;
-    color: white;
+.navbar a {
     text-decoration: none;
-    border-radius: 5px;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
+    color: #4E4E4E;
 }
 
-.view-project-btn:hover {
-    background-color: #20232a;
-}
-
-/* About me section */
-.about-me {
-    padding: 50px 20px;
-    background-color: #eaeaea;
+.hero-text {
     text-align: center;
+    margin-top: 50px;
 }
 
-.about-me h2 {
-    font-size: 2.5em;
+.hero-text h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.hero-text p {
+    font-size: 24px;
+    font-weight: 300;
+    max-width: 800px;
+    margin: 100px auto;
+}
+
+.project-container {
+    width: 1450px;
+    height: 650px;
+    background-color: #F4F4F4;
+    border-radius: 100px;
+    display: flex;
+    overflow: hidden;
+}
+
+.project-image {
+    width: 546px;
+    height: 427px;
+    object-fit: cover;
+}
+
+.project-description {
+    padding: 50px;
+}
+
+.project-description h2 {
+    font-size: 40px;
+    font-weight: 500;
     margin-bottom: 20px;
 }
 
-.about-me .profile-pic {
-    max-width: 150px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-}
-
-/* Footer */
-footer {
-    background-color: #282c34;
-    color: white;
-    padding: 20px 10px;
-    text-align: center;
-}
-
-footer .social-media img {
-    width: 30px;
-    margin: 0 10px;
-    filter: brightness(0) invert(1);
+.project-description p {
+    font-size: 24px;
 }
