@@ -1,12 +1,17 @@
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: white;
-    color: #4E4E4E;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: white;
+    color: #4E4E4E;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 .navbar {
@@ -14,36 +19,47 @@ body {
     justify-content: center;
     gap: 100px;
     margin-top: 50px;
-    font-size: 24px;
+    width: 100%;
 }
 
 .navbar a {
     text-decoration: none;
     color: #4E4E4E;
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
 }
 
 .hero-text {
     text-align: center;
-    margin-top: 250px; /* Moved down by 50 pixels */
+    margin-top: 250px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero-text h1 {
+    font-family: 'Poppins', sans-serif;
     font-size: 48px;
     font-weight: bold;
 }
 
 .hero-text p {
+    font-family: 'Poppins', sans-serif;
     font-size: 24px;
     font-weight: 300;
     max-width: 800px;
+    text-align: center;
     margin: 100px auto;
 }
 
 .projects-section {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 100px;
-    margin-top: 250px; /* Moved down by 50 pixels */
+    margin-top: 250px;
+    width: 100%;
 }
 
 .project-container {
@@ -63,15 +79,19 @@ body {
 
 .project-description {
     padding: 50px;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-description h2 {
+    font-family: 'Poppins', sans-serif;
     font-size: 40px;
     font-weight: 500;
     margin-bottom: 20px;
 }
 
 .project-description p {
+    font-family: 'Poppins', sans-serif;
     font-size: 24px;
 }
 
@@ -86,6 +106,7 @@ body {
 }
 
 .about-section h2 {
+    font-family: 'Poppins', sans-serif;
     font-size: 36px;
     font-weight: 300;
     margin-bottom: 50px;
@@ -100,6 +121,7 @@ body {
 }
 
 .about-section p {
+    font-family: 'Poppins', sans-serif;
     font-size: 24px;
     margin-bottom: 50px;
 }
@@ -109,6 +131,7 @@ body {
     gap: 100px;
     margin-top: 50px;
     margin-bottom: 50px;
+    align-items: center;
 }
 
 .logo-container {
@@ -124,6 +147,7 @@ body {
 }
 
 .social-logos p {
+    font-family: 'Poppins', sans-serif;
     font-size: 24px;
     font-weight: 300;
 }
