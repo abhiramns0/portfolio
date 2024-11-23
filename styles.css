@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -11,6 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;
 }
 
 .navbar {
@@ -19,18 +21,31 @@ body {
     gap: 100px;
     margin-top: 50px;
     width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px 0;
+    z-index: 1000;
 }
 
 .navbar a {
     text-decoration: none;
     color: #4E4E4E;
     font-size: 24px;
+    transition: opacity 0.3s;
+}
+
+.navbar a:hover {
+    opacity: 0.7;
 }
 
 .hero-text {
     text-align: center;
     margin-top: 250px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero-text h1 {
@@ -40,7 +55,115 @@ body {
 
 .hero-text p {
     font-size: 24px;
+    font-weight: 300;
     max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    text-align: center;
+    margin: 100px auto;
+}
+
+#work {
+    margin-top: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+}
+
+.project-container {
+    width: 1450px;
+    height: 650px;
+    background-color: #F4F4F4;
+    border-radius: 100px;
+    display: flex;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.project-container:hover {
+    transform: translateY(-10px);
+}
+
+.project-image {
+    width: 546px;
+    height: 427px;
+    object-fit: cover;
+    margin: auto 0;
+    padding-left: 50px;
+}
+
+.project-description {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.project-description h2 {
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.project-description p {
+    font-size: 24px;
+}
+
+#about {
+    width: 100%;
+    height: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.about-heading {
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 50px;
+}
+
+.profile-image {
+    width: 285px;
+    height: 285px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 30px;
+}
+
+.about-text {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 50px;
+}
+
+.social-section {
+    display: flex;
+    gap: 100px;
+    margin-top: 50px;
+}
+
+.social-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #4E4E4E;
+    transition: transform 0.3s;
+}
+
+.social-container:hover {
+    transform: translateY(-5px);
+}
+
+.social-logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.social-text {
+    font-size: 24px;
+    font-weight: 300;
 }
