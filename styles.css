@@ -103,7 +103,7 @@ main {
     width: 455px;
     height: 355px;
     object-fit: cover;
-    border-radius: 50px;
+    border-radius: 20px;
 }
 
 .project-content {
@@ -118,7 +118,7 @@ main {
 }
 
 .project-content h3 {
-    margin-top: 36px;
+    margin-top: 20px;
     font-size: 24px;
     font-weight: 500;
     color: #696969;
