@@ -171,7 +171,7 @@ main {
 }
 
 .detail-value {
-    margin-top: 25px;
+    margin-top: 5px; /* was 35 */
     font-size: 24px;
     font-weight: 500;
 }
