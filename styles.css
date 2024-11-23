@@ -182,10 +182,10 @@ main {
 }
 
 .detail-group:nth-child(2) {
-    margin-left: 0; /* Remove the previous margin */
-    position: absolute;
-    left: 150px; /* Position from left edge of project card */
-    width: calc(100%); /* Trial to remove text break*/
+    position: relative; /* Allow natural flex alignment */
+    left: auto; /* Remove fixed left positioning */
+    margin-left: 0; /* Reset unnecessary margin */
+    width: auto; /* Adjust width to content */
 }
 
 .detail-label {
