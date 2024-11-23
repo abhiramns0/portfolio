@@ -19,7 +19,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 100px;
-    margin-top: 50px;
+    margin-top: 20px;
     width: 100%;
     position: fixed;
     top: 0;
