@@ -4,6 +4,30 @@
     box-sizing: border-box;
 }
 
+.navbar {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 100px;
+    padding: 20px 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    z-index: 1000;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #696969;
+    font-size: 16px;
+    transition: opacity 0.3s;
+}
+
+.navbar a:hover {
+    opacity: 0.7;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: white;
@@ -41,7 +65,7 @@ main {
 
 .arrow-down {
     margin: 135px auto 0;
-    width: 2px;
+    width: 4px; /* Increased from 2px */
     height: 40px;
     background-color: #696969;
     position: relative;
@@ -52,10 +76,10 @@ main {
     position: absolute;
     bottom: 0;
     left: -4px;
-    width: 10px;
-    height: 10px;
-    border-right: 2px solid #696969;
-    border-bottom: 2px solid #696969;
+    width: 20px; /* Increased size */
+    height: 20px; /* Increased size */
+    border-right: 4px solid #696969; /* Increased thickness */
+    border-bottom: 4px solid #696969; /* Increased thickness */
     transform: rotate(45deg);
 }
 
@@ -110,6 +134,7 @@ main {
 .project-details {
     position: absolute;
     bottom: 70px;
+    left: 60px; /* Added this */
     display: flex;
     gap: 160px;
 }
@@ -117,6 +142,10 @@ main {
 .detail-group {
     display: flex;
     flex-direction: column;
+}
+
+.detail-group:nth-child(2) {
+    margin-left: 160px; /* Distance between Duration and Project type */
 }
 
 .detail-label {
@@ -133,7 +162,7 @@ main {
 .view-project-btn {
     position: absolute;
     bottom: 70px;
-    right: 50px;
+    left: 550px; /* Changed from right to left */
     width: 145px;
     height: 68px;
     background-color: #000000;
@@ -170,7 +199,7 @@ main {
 .arrow-right {
     margin-top: 70px;
     width: 40px;
-    height: 2px;
+    height: 4px; /* Increased from 2px */
     background-color: #696969;
     position: relative;
 }
@@ -180,10 +209,10 @@ main {
     position: absolute;
     right: 0;
     top: -4px;
-    width: 10px;
-    height: 10px;
-    border-top: 2px solid #696969;
-    border-right: 2px solid #696969;
+    width: 20px; /* Increased size */
+    height: 20px; /* Increased size */
+    border-top: 4px solid #696969; /* Increased thickness */
+    border-right: 4px solid #696969; /* Increased thickness */
     transform: rotate(45deg);
 }
 
