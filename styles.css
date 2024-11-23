@@ -118,7 +118,7 @@ main {
     background-color: #ECF3FF;
 }
 
-.project-card:nth-child(3) {
+.project-card:nth-child(5) {
     background-color: #F0E8FF;
 }
 
@@ -172,7 +172,7 @@ main {
     margin-left: 0; /* Remove the previous margin */
     position: absolute;
     left: 150px; /* Position from left edge of project card */
-    width: calc(100% - 20px); /* Trial to remove text breal*/
+    width: calc(100%); /* Trial to remove text break*/
 }
 
 .detail-label {
