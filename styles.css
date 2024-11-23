@@ -28,6 +28,15 @@
     opacity: 0.7;
 }
 
+html {
+    scroll-behavior: smooth; /* Enables smooth scrolling */
+}
+
+/* Adjust scroll position to account for fixed navbar */
+#work, #about {
+    scroll-margin-top: 100px;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: white;
@@ -61,6 +70,7 @@ main {
     margin-top: 70px;
     font-weight: 300;
     font-size: 20px;
+    max-width: 753px; /* Added max-width */
 }
 
 .arrow-down {
@@ -74,13 +84,14 @@ main {
 .arrow-down::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: -4px;
-    width: 20px; /* Increased size */
-    height: 20px; /* Increased size */
-    border-right: 4px solid #696969; /* Increased thickness */
-    border-bottom: 4px solid #696969; /* Increased thickness */
+    bottom: -8px; /* Adjusted position */
+    left: -8px;
+    width: 20px;
+    height: 20px;
+    border-right: 4px solid #696969;
+    border-bottom: 4px solid #696969;
     transform: rotate(45deg);
+    transform-origin: center; /* Ensures rotation around center */
 }
 
 .projects {
@@ -97,6 +108,25 @@ main {
     box-shadow: 0 15px 15px rgba(0, 0, 0, 0.1);
     display: flex;
     position: relative;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Different colors for each project */
+.project-card:nth-child(1) {
+    background-color: #F0FFED;
+}
+
+.project-card:nth-child(2) {
+    background-color: #FFF6ED;
+}
+
+.project-card:nth-child(3) {
+    background-color: #EDF4FF;
 }
 
 .project-image {
@@ -174,6 +204,12 @@ main {
     text-decoration: none;
     font-size: 16px;
     font-weight: 500;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.view-project-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .more-works {
