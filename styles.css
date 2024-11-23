@@ -79,6 +79,7 @@ main {
     width: 455px;
     height: 355px;
     object-fit: cover;
+    border-radius: 50px;
 }
 
 .project-content {
