@@ -162,7 +162,7 @@ main {
 .detail-group:nth-child(2) {
     margin-left: 0; /* Remove the previous margin */
     position: absolute;
-    left: 220px; /* Position from left edge of project card */
+    left: 180px; /* Position from left edge of project card */
 }
 
 .detail-label {
