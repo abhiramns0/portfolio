@@ -19,7 +19,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 100px;
-    margin-top: 0px;
+    margin-top: 10px;
     width: 35%;
     position: fixed;
     top: 0;
@@ -31,7 +31,7 @@ body {
 .navbar a {
     text-decoration: none;
     color: #4E4E4E;
-    font-size: 24px;
+    font-size: 16px;
     transition: opacity 0.3s;
 }
 
@@ -54,7 +54,7 @@ body {
 }
 
 .hero-text p {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 300;
     max-width: 800px;
     text-align: center;
