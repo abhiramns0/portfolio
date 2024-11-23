@@ -148,6 +148,7 @@ main {
 
 .project-details {
     position: absolute;
+    margin-top: 15px; /* Just added now to lift details*/
     bottom: 70px;
     left: 60px; /* Added this */
     display: flex;
@@ -171,7 +172,7 @@ main {
 }
 
 .detail-value {
-    margin-top: 5px; /* was 35 */
+    margin-top: 15px; /* was 35 */
     font-size: 24px;
     font-weight: 500;
 }
