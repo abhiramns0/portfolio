@@ -173,7 +173,7 @@ main {
     bottom: 70px;
     left: 60px; /* Added this */
     display: flex;
-    gap: 160px;
+    gap: 60px; /* this was 180*/
 }
 
 .detail-group {
