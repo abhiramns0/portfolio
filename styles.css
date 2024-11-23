@@ -89,6 +89,7 @@ body {
     object-fit: cover;
     margin: auto 0;
     padding-left: 50px;
+    border-radius: 50px;
 }
 
 .project-description {
