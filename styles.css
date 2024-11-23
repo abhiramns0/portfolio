@@ -303,4 +303,6 @@ main {
 .social-link span {
     font-size: 16px;
     font-weight: 300;
+    font-family: 'Poppins', sans-serif; /* Explicitly set font */
+    color: #FFFFFF; /* Make sure color is white */
 }
