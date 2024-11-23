@@ -145,7 +145,7 @@ main {
 }
 
 .detail-group:nth-child(2) {
-    margin-left: 160px; /* Distance between Duration and Project type */
+    margin-left: 45px; /* Distance between Duration and Project type */
 }
 
 .detail-label {
