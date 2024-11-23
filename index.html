@@ -1,81 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhiram's Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <nav class="navbar">
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="https://drive.google.com/file/d/137oiF-6MtJzSn1vhQD5wgykKUSkIyFAO/view?usp=sharing" target="_blank">Resume</a>
-    </nav>
-
-    <div class="hero-text">
-        <h1>Hi, I am Abhiram</h1>
-        <p>I design intuitive experiences that seamlessly connect user needs with the magic of technology, driven by curiosity and a passion for innovation.</p>
+<!-- Add this HTML just before closing body tag -->
+<div class="modal" id="projectModal">
+    <span class="close-button" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+        <iframe id="behanceEmbed" src="" frameborder="0" allowfullscreen></iframe>
     </div>
+</div>
 
-    <section id="work">
-        <div class="project-container">
-            <a href="https://www.behance.net/gallery/213171205/Redefining-Rural-Retail-Through-System-Design" target="_blank">
-                <img src="Grama.png" alt="Grama Project" class="project-image">
-            </a>
-            <div class="project-description">
-                <h2>Grama: A one stop for rural retail</h2>
-                <p>Grama is a design solution aimed at empowering rural commerce by connecting shopkeepers, customers, suppliers, and delivery agents through a unified platform. By addressing inventory management, pricing transparency, and credit systems, Grama fosters trust, enhances efficiency, and strengthens community bonds in the heart of rural India.</p>
-            </div>
-        </div>
+<!-- Add this JavaScript just before closing body tag -->
+<script>
+    const modal = document.getElementById('projectModal');
+    const behanceEmbed = document.getElementById('behanceEmbed');
 
-        <div class="project-container">
-            <a href="YOUR_BEHANCE_LINK_2" target="_blank">
-                <img src="chordex.png" alt="Project 2" class="project-image">
-            </a>
-            <div class="project-description">
-                <h2>Chordex: A wearable chorded keyboard for Malayalam</h2>
-                <p>Project 2 description goes here. Describe the project's goals, your role, and the impact it created.</p>
-            </div>
-        </div>
+    function openModal(projectId) {
+        modal.style.display = 'block';
+        behanceEmbed.src = `https://www.behance.net/embed/project/${projectId}`;
+        document.body.style.overflow = 'hidden';
+    }
 
-        <div class="project-container">
-            <a href="YOUR_BEHANCE_LINK_3" target="_blank">
-                <img src="anva.png" alt="Project 3" class="project-image">
-            </a>
-            <div class="project-description">
-                <h2>Gesture-Based Swarm Robot Control in VR</h2>
-                <p>Gesture-Based Swarm Robot Control in VR</p>
-            </div>
-        </div>
+    function closeModal() {
+        modal.style.display = 'none';
+        behanceEmbed.src = '';
+        document.body.style.overflow = 'auto';
+    }
 
-        <div class="project-container">
-            <a href="YOUR_BEHANCE_LINK_4" target="_blank">
-                <img src="path_to_your_image4.jpg" alt="Project 4" class="project-image">
-            </a>
-            <div class="project-description">
-                <h2>Project 4 Title</h2>
-                <p>Project 4 description goes here. Highlight the innovative aspects and impact of this project.</p>
-            </div>
-        </div>
-    </section>
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
 
-    <section id="about">
-        <h2 class="about-heading">About me</h2>
-        <img src="yourphoto.jpg" alt="Profile" class="profile-image">
-        <p class="about-text">Just a wonderer wandering around</p>
-        
-        <div class="social-section">
-            <a href="YOUR_LINKEDIN_URL" target="_blank" class="social-container">
-                <img src="path_to_linkedin_logo.png" alt="LinkedIn" class="social-logo">
-                <p class="social-text">LinkedIn</p>
-            </a>
-            <a href="YOUR_INSTAGRAM_URL" target="_blank" class="social-container">
-                <img src="path_to_instagram_logo.png" alt="Instagram" class="social-logo">
-                <p class="social-text">Instagram</p>
-            </a>
-        </div>
-    </section>
-</body>
-</html>
+<!-- Modify your project containers like this -->
+<div class="project-container" onclick="openModal('YOUR_PROJECT_ID')">
+    <div class="project-image">
+        <img src="path_to_your_image1.jpg" alt="Grama Project">
+    </div>
+    <div class="project-description">
+        <h2>Grama: A one stop for rural retail</h2>
+        <p>Grama is a design solution...</p>
+    </div>
+</div>
