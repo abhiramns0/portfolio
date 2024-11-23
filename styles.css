@@ -67,32 +67,16 @@ main {
 }
 
 .hero-description {
-    margin-top: 70px;
+    margin: 70px auto 0;
     font-weight: 300;
     font-size: 20px;
-    max-width: 753px; /* Added max-width */
-    text-align: center;
+    max-width: 753px;
+    text-align: center; /* Added this line */
 }
 
 .arrow-down {
+    display: block;
     margin: 135px auto 0;
-    width: 4px; /* Increased from 2px */
-    height: 40px;
-    background-color: #696969;
-    position: relative;
-}
-
-.arrow-down::after {
-    content: '';
-    position: absolute;
-    bottom: -8px; /* Adjusted position */
-    left: -8px;
-    width: 20px;
-    height: 20px;
-    border-right: 4px solid #696969;
-    border-bottom: 4px solid #696969;
-    transform: rotate(45deg);
-    transform-origin: center; /* Ensures rotation around center */
 }
 
 .projects {
@@ -176,7 +160,9 @@ main {
 }
 
 .detail-group:nth-child(2) {
-    margin-left: 0px; /* Distance between Duration and Project type */
+    margin-left: 0; /* Remove the previous margin */
+    position: absolute;
+    left: 220px; /* Position from left edge of project card */
 }
 
 .detail-label {
@@ -242,22 +228,6 @@ main {
 
 .arrow-right {
     margin-top: 70px;
-    width: 40px;
-    height: 4px; /* Increased from 2px */
-    background-color: #696969;
-    position: relative;
-}
-
-.arrow-right::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: -4px;
-    width: 20px; /* Increased size */
-    height: 20px; /* Increased size */
-    border-top: 4px solid #696969; /* Increased thickness */
-    border-right: 4px solid #696969; /* Increased thickness */
-    transform: rotate(45deg);
 }
 
 .about {
