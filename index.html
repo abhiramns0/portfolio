@@ -1,43 +1,112 @@
-<!-- Add this HTML just before closing body tag -->
-<div class="modal" id="projectModal">
-    <span class="close-button" onclick="closeModal()">&times;</span>
-    <div class="modal-content">
-        <iframe id="<iframe src="https://www.behance.net/embed/project/213171205?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin"></iframe>" src="" frameborder="0" allowfullscreen></iframe>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhiram's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <div class="hero-section">
+            <h1><span class="light">Hi, I am</span> <span class="name">Abhiram</span></h1>
+            <p class="hero-description">I design intuitive experiences that seamlessly connect user needs with the magic of technology, driven by curiosity and a passion for innovation</p>
+            <div class="arrow-down"></div>
+        </div>
 
-<!-- Add this JavaScript just before closing body tag -->
-<script>
-    const modal = document.getElementById('projectModal');
-    const behanceEmbed = document.getElementById('behanceEmbed');
+        <section class="projects">
+            <article class="project-card">
+                <div class="project-image-container">
+                    <img src="Grama.png" alt="Grama Project" class="project-image">
+                </div>
+                <div class="project-content">
+                    <h2>Grama</h2>
+                    <h3>A one stop for rural retail</h3>
+                    <p class="project-description">Grama is a design solution aimed at empowering rural commerce by connecting shopkeepers, customers, suppliers, and delivery agents through a unified platform.</p>
+                    <div class="project-details">
+                        <div class="detail-group">
+                            <span class="detail-label">Duration:</span>
+                            <span class="detail-value">4 months</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Project type:</span>
+                            <span class="detail-value">Graduation Project</span>
+                        </div>
+                    </div>
+                    <a href="#" class="view-project-btn">View Project</a>
+                </div>
+            </article>
 
-    function openModal(projectId) {
-        modal.style.display = 'block';
-        behanceEmbed.src = `https://www.behance.net/embed/project/${projectId}`;
-        document.body.style.overflow = 'hidden';
-    }
+            <article class="project-card">
+                <div class="project-image-container">
+                    <img src="chordex.png" alt="Chordex Project" class="project-image">
+                </div>
+                <div class="project-content">
+                    <h2>Chordex</h2>
+                    <h3>A wearable chorded keyboard for Malayalam</h3>
+                    <p class="project-description">Description for Chordex project goes here.</p>
+                    <div class="project-details">
+                        <div class="detail-group">
+                            <span class="detail-label">Duration:</span>
+                            <span class="detail-value">4 months</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Project type:</span>
+                            <span class="detail-value">Graduation Project</span>
+                        </div>
+                    </div>
+                    <a href="#" class="view-project-btn">View Project</a>
+                </div>
+            </article>
 
-    function closeModal() {
-        modal.style.display = 'none';
-        behanceEmbed.src = '';
-        document.body.style.overflow = 'auto';
-    }
+            <article class="project-card">
+                <div class="project-image-container">
+                    <img src="anva.png" alt="Anva Project" class="project-image">
+                </div>
+                <div class="project-content">
+                    <h2>Anva</h2>
+                    <h3>Gesture-Based Swarm Robot Control in VR</h3>
+                    <p class="project-description">Description for Anva project goes here.</p>
+                    <div class="project-details">
+                        <div class="detail-group">
+                            <span class="detail-label">Duration:</span>
+                            <span class="detail-value">4 months</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Project type:</span>
+                            <span class="detail-value">Graduation Project</span>
+                        </div>
+                    </div>
+                    <a href="#" class="view-project-btn">View Project</a>
+                </div>
+            </article>
 
-    // Close modal when clicking outside
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            closeModal();
-        }
-    }
-</script>
+            <div class="more-works">
+                <h2>More Works</h2>
+                <div class="arrow-right"></div>
+            </div>
+        </section>
 
-<!-- Modify your project containers like this -->
-<div class="project-container" onclick="openModal('YOUR_PROJECT_ID')">
-    <div class="project-image">
-        <img src="path_to_your_image1.jpg" alt="Grama Project">
-    </div>
-    <div class="project-description">
-        <h2>Grama: A one stop for rural retail</h2>
-        <p>Grama is a design solution...</p>
-    </div>
-</div>
+        <section class="about">
+            <h2>About</h2>
+            <img src="profile.jpg" alt="Profile" class="profile-image">
+            <p class="quote">Just a wonderer wandering around</p>
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <img src="linkedin.png" alt="LinkedIn" class="social-icon">
+                    <span>LinkedIn</span>
+                </a>
+                <a href="#" class="social-link">
+                    <img src="behance.png" alt="Behance" class="social-icon">
+                    <span>Behance</span>
+                </a>
+                <a href="#" class="social-link">
+                    <img src="instagram.png" alt="Instagram" class="social-icon">
+                    <span>Instagram</span>
+                </a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
