@@ -177,8 +177,8 @@ main {
 }
 
 .detail-group {
-    display: flex;
-    flex-direction: column;
+    position: relative; /* Avoid restrictions caused by absolute positioning */
+    width: auto; /* Ensure content dictates size */
 }
 
 .detail-group:nth-child(2) {
@@ -194,7 +194,8 @@ main {
 }
 
 .detail-value {
-    margin-top: 15px; /* was 35 */
+    white-space: nowrap;
+    overflow: visible; /* Or text-overflow: ellipsis if truncation is acceptable */
     font-size: 24px;
     font-weight: 500;
 }
