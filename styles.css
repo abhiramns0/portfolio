@@ -164,6 +164,7 @@ main {
     margin-left: 0; /* Remove the previous margin */
     position: absolute;
     left: 150px; /* Position from left edge of project card */
+    width: calc(100% - 260px); /* Trial to remove text breal*/
 }
 
 .detail-label {
