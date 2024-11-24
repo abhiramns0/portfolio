@@ -101,7 +101,7 @@ main {
     transform: translateX(-50%); /* Adjust for centering */
     width: 50px; /* Set circle dimensions */
     height: 50px;
-    background-color: #FFFFFF; /* Set circle color */
+    background-color: #696969; /* Set circle color */
     border-radius: 50%; /* Make it a circle */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add shadow */
     visibility: visible; /* Ensure visibility on hover */
