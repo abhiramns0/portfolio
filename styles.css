@@ -337,3 +337,26 @@ main {
     font-family: 'Poppins', sans-serif; /* Explicitly set font */
     color: #FFFFFF; /* Make sure color is white */
 }
+
+.footer-content {
+    margin-top: 90px; /* Distance from social links */
+    text-align: center; /* Center-align content */
+}
+
+.footer-content .name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600; /* Semi-bold */
+    color: #FFFFFF; /* Adjust color if necessary */
+    display: block; /* Ensure each part is on its own line */
+    margin-bottom: 30px; /* Space before copyright */
+}
+
+.footer-content .copyright {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 300; /* Light */
+    color: #FFFFFF;
+    display: block;
+    margin-bottom: 70px; /* Space below footer */
+}
