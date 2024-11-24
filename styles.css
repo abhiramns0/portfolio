@@ -86,50 +86,37 @@ main {
     }
 }
 
-/* Container for circle and arrow */
-.circle-container {
-    position: relative;
+/* Arrow Styles */
+.arrow-down {
+    display: block;
     margin: 135px auto 0;
-    width: 50px; /* Width of the circle */
-    height: 90px; /* Combined height for spacing */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    animation: bounceDown 1.5s ease-in-out infinite;
+    position: relative; /* Ensure it doesn't interfere with the circle */
+    z-index: 2; /* Keep arrow on top of other elements */
 }
 
-/* Circle styling */
+/* Circle Styles */
 .circle {
+    position: absolute; /* Independent positioning */
+    top: 180px; /* Adjust to align directly under arrow */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center alignment adjustment */
     width: 50px;
     height: 50px;
-    background-color: #FFFFFF; /* Match project card background */
-    border-radius: 50%;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Initial shadow */
-    transition: box-shadow 0.3s ease; /* Smooth shadow transition */
-    margin-bottom: 10px; /* Space between circle and arrow */
-    display: inline-block;
+    background-color: #F0FFED; /* Match project card style */
+    border-radius: 50%; /* Circle shape */
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); /* Initially no shadow */
+    visibility: hidden; /* Hide circle initially */
+    opacity: 0; /* Fully transparent initially */
+    transition: visibility 0s, opacity 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
 }
 
-/* Hover effect for the circle */
-.circle:hover {
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+/* Hover Effect */
+.arrow-down:hover + .circle {
+    visibility: visible; /* Make circle visible */
+    opacity: 1; /* Fade-in effect */
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2); /* Shadow on hover */
 }
-
-/* Arrow styles */
-.arrow-down {
-    animation: bounceDown 1.5s ease-in-out infinite; /* Optional animation */
-    margin: 0 auto; /* Center align arrow */
-}
-
-/* Enables smooth scrolling for the circle link */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Adjust scroll position to account for fixed navbar */
-#work {
-    scroll-margin-top: 100px;
-}  /* circle exp*/
 
 .projects {
     margin-top: 100px; /* 120trying to make it apprear a bit*/
