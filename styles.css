@@ -74,24 +74,62 @@ main {
     text-align: center; /* Added this line */
 }
 
+/* Container for arrow and circle */
+.scroll-indicator {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin: 135px auto 0;
+    cursor: pointer;
+}
+
+/* Style for the hover circle */
+.hover-circle {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    opacity: 0;
+    transition: all 0.3s ease;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Show circle and add shadow on hover */
+.scroll-indicator:hover .hover-circle {
+    opacity: 5;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Adjust arrow position to be centered over circle */
+.scroll-indicator .arrow-down {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    z-index: 1;
+}
+
+/* Keep the existing arrow animation */
 @keyframes bounceDown {
     0%, 100% {
-        transform: translateY(0);
+        transform: translate(-50%, -50%);
     }
     50% {
-        transform: translateY(10px);
+        transform: translate(-50%, -40%);
     }
     75% {
-        transform: translateY(-3px);
+        transform: translate(-50%, -53%);
     }
 }
 
-.arrow-down {
-    display: block;
-    margin: 135px auto 0;
+/* Update arrow animation to work with new positioning */
+.scroll-indicator .arrow-down {
     animation: bounceDown 1.5s ease-in-out infinite;
-} /* added for animation*/
-
+}
 .projects {
     margin-top: 100px; /* 120trying to make it apprear a bit*/
 }
