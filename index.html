@@ -18,10 +18,20 @@
             <h1><span class="light">Hi, I am</span> <span class="name">Abhiram</span></h1>
             <p class="hero-description">I design intuitive experiences that seamlessly connect user needs with the magic of technology, driven by curiosity and a passion for innovation</p>
 
-            
-    <svg class="arrow-down" width="20" height="40" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M20 2L20 38M20 38L38 20M20 38L2 20" stroke="#CDCDCD" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+        
+    <div class="scroll-indicator">
+        <div class="hover-circle"></div>
+        <svg class="arrow-down" width="20" height="40" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 2L20 38M20 38L38 20M20 38L2 20" stroke="#CDCDCD" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+            <script>
+    document.querySelector('.scroll-indicator').addEventListener('click', function() {
+        document.querySelector('#work').scrollIntoView({ 
+            behavior: 'smooth'
+        });
+    });
+</script>
 
 
         </div>
