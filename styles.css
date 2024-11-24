@@ -373,3 +373,69 @@ main {
     padding-bottom: 70px; /* Changed from margin to padding */
 }
 
+/* Styling for the page */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrollbars during animation */
+    background-color: #000; /* Space-like background */
+}
+
+/* Rocket base */
+.rocket {
+    position: absolute;
+    top: 50%;
+    left: -50px; /* Start off-screen */
+    width: 30px;
+    height: 50px;
+    background-color: #FF4500; /* Rocket body color */
+    clip-path: polygon(50% 0%, 100% 30%, 75% 100%, 25% 100%, 0% 30%); /* Triangle rocket */
+    animation: fly-across 5s ease-in-out infinite;
+}
+
+/* Rocket flames */
+.rocket::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 30px;
+    background: linear-gradient(to bottom, #FF4500, #FFFF00, transparent);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    animation: flicker 0.2s infinite;
+}
+
+/* Rocket animation */
+@keyframes fly-across {
+    0% {
+        left: -60px; /* Start off-screen on the left */
+        top: calc(30% + 10px); /* Random height adjustment */
+        transform: rotate(-5deg); /* Slight tilt */
+    }
+    25% {
+        transform: rotate(0deg); /* Straighten mid-flight */
+    }
+    50% {
+        top: calc(20% + 30px); /* Slight vertical variation */
+    }
+    100% {
+        left: 100vw; /* End off-screen on the right */
+        top: calc(50% - 20px); /* Slight vertical adjustment */
+    }
+}
+
+/* Flame flicker effect */
+@keyframes flicker {
+    0%, 100% {
+        transform: translateX(-50%) scaleY(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(-50%) scaleY(0.8);
+        opacity: 0.8;
+    }
+}
+
+
