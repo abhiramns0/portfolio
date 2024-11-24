@@ -271,9 +271,10 @@ main {
     animation-play-state: paused;
 } /*pause animation on hover*/
 
+/* CSS Styles */
 .about {
     background-color: #363636;
-    padding: 10px 0; /* 50*/
+    padding: 10px 0;
     text-align: center;
 }
 
@@ -282,7 +283,7 @@ main {
     font-size: 36px;
     font-weight: 300;
     margin-bottom: 60px;
-    margin-top: 10px; /* Just added to check */
+    margin-top: 10px;
 }
 
 .profile-image {
@@ -299,11 +300,19 @@ main {
     font-weight: 300;
 }
 
-.social-links {
+/* New container for social links */
+.social-container {
+    width: 100%;
     margin-top: 75px;
+}
+
+.social-links {
     display: flex;
     justify-content: center;
     gap: 40px;
+    flex-wrap: wrap; /* Added for responsiveness */
+    max-width: 800px; /* Maximum width to maintain layout */
+    margin: 0 auto; /* Center the container */
 }
 
 .social-link {
@@ -334,30 +343,33 @@ main {
 .social-link span {
     font-size: 13px;
     font-weight: 300;
-    font-family: 'Poppins', sans-serif; /* Explicitly set font */
-    color: #FFFFFF; /* Make sure color is white */
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
 }
 
+/* Footer styles */
 .footer-content {
-    margin-top: 90px; /* Distance from social links */
-    text-align: center; /* Center-align content */
+    width: 100%;
+    margin-top: 90px;
+    padding: 0 20px; /* Added padding for mobile */
+    box-sizing: border-box;
 }
 
 .footer-content .name {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
-    font-weight: 600; /* Semi-bold */
-    color: #FFFFFF; /* Adjust color if necessary */
-    display: block; /* Ensure each part is on its own line */
-    margin-bottom: 30px; /* Space before copyright */
+    font-weight: 600;
+    color: #FFFFFF;
+    display: block;
+    margin-bottom: 30px;
 }
 
 .footer-content .copyright {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
-    font-weight: 300; /* Light */
+    font-weight: 300;
     color: #FFFFFF;
     display: block;
-    margin-bottom: 70px; /* Space below footer */
+    padding-bottom: 70px; /* Changed from margin to padding */
 }
 
