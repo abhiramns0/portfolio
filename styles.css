@@ -94,7 +94,7 @@ main {
     transition: all 0.3s ease;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) translateY(10px); /* Added 10px downward offset */;
 }
 
 /* Show circle and add shadow on hover */
@@ -119,17 +119,18 @@ main {
         transform: translate(-50%, -50%);
     }
     50% {
-        transform: translate(-50%, -40%);
+        transform: translate(-50%, -30%);
     }
     75% {
-        transform: translate(-50%, -53%);
+        transform: translate(-50%, -55%);
     }
 }
 
 /* Update arrow animation to work with new positioning */
 .scroll-indicator .arrow-down {
-    animation: bounceDown 1.5s ease-in-out infinite;
+    animation: bounceDown 1s ease-in-out infinite;
 }
+
 .projects {
     margin-top: 100px; /* 120trying to make it apprear a bit*/
 }
