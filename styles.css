@@ -94,7 +94,7 @@ main {
     transition: all 0.3s ease;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) translateY(8px); /* Added 10px downward offset */;
+    transform: translate(-50%, -50%) translateY(6px); /* Added 10px downward offset */;
 }
 
 /* Show circle and add shadow on hover */
