@@ -74,6 +74,25 @@ class AnimationController {
       this.animate('normal');
     }, 5000);
 
+      // Trigger second animation at 11 seconds
+    setTimeout(() => {
+      if (!this.isAnimating) {
+        this.animate('normal');
+        this.hasPlayed11s = true;
+      } else {
+        // If currently animating, wait and try again
+        const checkAndAnimate = () => {
+          if (!this.isAnimating && !this.hasPlayed60s) {
+            this.animate('normal');
+            this.hasPlayed11s = true;
+          } else if (!this.hasPlayed11s) {
+            setTimeout(checkAndAnimate, 100);
+          }
+        };
+        setTimeout(checkAndAnimate, 100);
+      }
+    }, 11000);
+      
       // Trigger second animation at 60 seconds
     setTimeout(() => {
       if (!this.isAnimating) {
@@ -263,10 +282,21 @@ window.addEventListener('load', () => {
 
 
 <body>
+
+    <div class="header-container">
+    <img src="logo-day.png" alt="Day Logo" class="logo day">
+    <img src="logo-night.png" alt="Night Logo" class="logo night">
+    <div class="night-mode-toggle">
+        <input type="checkbox" id="night-mode-toggle">
+        <label for="night-mode-toggle"></label>
+    </div>
+        
     <nav class="navbar">
     <a href="#work">Work</a>
     <a href="#about">About</a>
     <a href="https://drive.google.com/file/d/137oiF-6MtJzSn1vhQD5wgykKUSkIyFAO/view?usp=sharing" target="_blank">Resume</a>
+</div>
+        
 </nav>
     <main>
         <div class="hero-section">
@@ -315,7 +345,8 @@ window.addEventListener('load', () => {
                 </div>
             </article>
 
-            <article class="project-card">
+
+             <article class="project-card">
                 <div class="project-image-container">
                     <img src="anva.png" alt="Anva Project" class="project-image">
                 </div>
@@ -334,10 +365,10 @@ Gesture-Based Swarm Control in VR leverages natural gestures to control aerial s
                             <span class="detail-value">Academic - Individual</span>
                         </div>
                     </div>
-                    <a href="https://www.behance.net/gallery/215053903/Gesture-Based-Swarm-Robot-Control-in-VR" class="view-project-btn">View Project</a>
+                    <a href="https://drive.google.com/file/d/1zZIZnnh5uKRk24XcFEjtw_XPvvxvhrF7/view?usp=sharing" class="view-project-btn">View Project</a>
                 </div>
             </article>
-                
+
             <article class="project-card">
                 <div class="project-image-container">
                     <img src="chordex.png" alt="Chordex Project" class="project-image">
@@ -356,7 +387,7 @@ Gesture-Based Swarm Control in VR leverages natural gestures to control aerial s
                             <span class="detail-value">Academic - Individual</span>
                         </div>
                     </div>
-                    <a href="https://www.behance.net/gallery/213288693/Wearable-Chorded-Keyboard-for-Malayalam" class="view-project-btn">View Project</a>
+                    <a href="https://drive.google.com/file/d/1Vc2jffGqKnNo_CZHgtoFiegCwR_VqBB5/view?usp=sharing" class="view-project-btn">View Project</a>
                 </div>
             </article>
 
@@ -446,5 +477,12 @@ An online Marketplace, Community and Awareness program to support the small scal
     </section>
 </section>
     </main>
+
+    <script>
+    document.getElementById('night-mode-toggle').addEventListener('change', function() {
+        document.body.classList.toggle('dark-mode');
+    });
+</script>
+    
 </body>
 </html>
