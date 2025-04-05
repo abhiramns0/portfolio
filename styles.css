@@ -4,6 +4,91 @@
     box-sizing: border-box;
 }
 
+/* Define light mode colors in :root */
+:root {
+    --bg-color: white;
+    --text-color: #696969;
+    --heading-color: #696969;
+    --subheading-color: #2A2A2A;
+    --navbar-bg: rgba(245, 245, 245, 0.9);
+    --project-card-bg: #F0FFED;
+    --project-card-bg-2: #FFF9ED;
+    --project-card-bg-3: #EDF4FF;
+    --project-card-bg-4: #ECF3FF;
+    --project-card-bg-5: #F0E8FF;
+    --more-works-bg: white;
+    --about-bg: #363636;
+    --about-text: #FFFFFF;
+    --button-bg: #2A2A2A;
+    --button-text: #FFFFFF;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --hover-shadow: rgba(0, 0, 0, 0.2);
+}
+
+/* Define dark mode colors */
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #D9D9D9;
+    --heading-color: #E5E5E5;
+    --subheading-color: #FFFFFF;
+    --navbar-bg: rgba(30, 30, 30, 0.9);
+    --project-card-bg: #10280A; /* Your custom night mode color */
+    --project-card-bg-2: #3A3105; /* Your custom night mode color */
+    --project-card-bg-3: #252525; /* Your custom night mode color */
+    --project-card-bg-4: #000B29; /* Your custom night mode color */
+    --project-card-bg-5: #170140; /* Your custom night mode color */
+    --more-works-bg: #1E1E1E;
+    --about-bg: #1E1E1E;
+    --about-text: #FFFFFF;
+    --button-bg: #DEDEDE;
+    --button-text: #3D3D3D;
+    --shadow-color: rgba(255, 255, 255, 0.1);
+    --hover-shadow: rgba(255, 255, 255, 0.2);
+}
+
+/* Apply variables to elements */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Header Container for Logo and Toggle */
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1001; /* Above animation-container but below navbar */
+}
+
+/* Logo Positioning */
+.logo {
+    position: absolute;
+    top: 15px; /* Matches your adjustment */
+    left: 50px; /* Your custom margin from left edge */
+    width: 50px;
+    height: 50px;
+    z-index: 1002; /* Ensure it’s above other elements */
+}
+
+.logo.day {
+    display: block; /* Visible in day mode */
+}
+
+.logo.night {
+    display: none; /* Hidden in day mode */
+}
+
+body.dark-mode .logo.day {
+    display: none; /* Hidden in dark mode */
+}
+
+body.dark-mode .logo.night {
+    display: block; /* Visible in dark mode */
+}
+
+/* Navbar */
 .navbar {
     position: fixed;
     top: 10px;
@@ -12,14 +97,14 @@
     display: flex;
     gap: 100px;
     padding: 20px 40px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: var(--navbar-bg);
     border-radius: 20px;
-    z-index: 1000;
+    z-index: 1002; /* Matches logo and toggle for consistency */
 }
 
 .navbar a {
     text-decoration: none;
-    color: #696969;
+    color: var(--text-color);
     font-size: 16px;
     transition: opacity 0.3s;
 }
@@ -28,19 +113,42 @@
     opacity: 0.7;
 }
 
-html {
-    scroll-behavior: smooth; /* Enables smooth scrolling */
+/* Night Mode Toggle Styles */
+.night-mode-toggle {
+    position: absolute;
+    top: 15px; /* Matches your adjustment */
+    right: 50px; /* Your custom margin from right edge */
+    display: flex;
+    align-items: center;
+    z-index: 1002; /* Ensure it’s above other elements */
 }
 
-/* Adjust scroll position to account for fixed navbar */
+.night-mode-toggle input {
+    display: none !important; /* Reinforced to hide checkbox */
+}
+
+.night-mode-toggle label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: url('toggle-day.png') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+    margin: 0; /* Remove default margins */
+    padding: 0; /* Remove default padding */
+}
+
+body.dark-mode .night-mode-toggle label {
+    background: url('toggle-night.png') no-repeat center;
+    background-size: contain;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 #work, #about {
     scroll-margin-top: 100px;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: white;
-    color: #696969;
 }
 
 main {
@@ -56,6 +164,7 @@ main {
 
 .hero-section h1 {
     font-size: 40px;
+    color: var(--heading-color);
 }
 
 .hero-section .light {
@@ -71,10 +180,9 @@ main {
     font-weight: 300;
     font-size: 20px;
     max-width: 753px;
-    text-align: center; /* Added this line */
+    text-align: center;
 }
 
-/* Container for arrow and circle */
 .scroll-indicator {
     position: relative;
     width: 50px;
@@ -83,27 +191,24 @@ main {
     cursor: pointer;
 }
 
-/* Style for the hover circle */
 .hover-circle {
     position: absolute;
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background-color: #FFFFFF;
+    background-color: var(--bg-color);
     opacity: 0;
     transition: all 0.3s ease;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) translateY(6px); /* Added 10px downward offset */;
+    transform: translate(-50%, -50%) translateY(10px);
 }
 
-/* Show circle and add shadow on hover */
 .scroll-indicator:hover .hover-circle {
-    opacity: 5;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    opacity: 0.5; /* Adjusted from 5 to a valid opacity value (0-1) */
+    box-shadow: 0 0 20px var(--hover-shadow);
 }
 
-/* Adjust arrow position to be centered over circle */
 .scroll-indicator .arrow-down {
     position: absolute;
     top: 50%;
@@ -113,7 +218,6 @@ main {
     z-index: 1;
 }
 
-/* Keep the existing arrow animation */
 @keyframes bounceDown {
     0%, 100% {
         transform: translate(-50%, -50%);
@@ -126,53 +230,44 @@ main {
     }
 }
 
-/* Update arrow animation to work with new positioning */
 .scroll-indicator .arrow-down {
-    animation: bounceDown 1s ease-in-out infinite;
+    animation: bounceDown 1s ease-in-out infinite; /* Fixed typo 'AscrollDown' */
 }
 
 .projects {
-    margin-top: 100px; /* 120trying to make it apprear a bit*/
+    margin-top: 100px;
 }
 
 .project-card {
     width: 1040px;
     height: 580px;
     margin: 0 auto 90px;
-    background-color: #F0FFED;
+    background-color: var(--project-card-bg);
     border-radius: 50px;
     padding: 40px;
-    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 15px var(--shadow-color);
     display: flex;
     position: relative;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
 }
 
 .project-card:hover {
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 25px var(--hover-shadow);
 }
 
-/* Different colors for each project */
-.project-card:nth-child(1) {
-    background-color: #F0FFED;
+body.dark-mode .project-card {
+    box-shadow: inset 0 0 15px var(--shadow-color);
 }
 
-.project-card:nth-child(2) {
-    background-color: #FFF9ED;
+body.dark-mode .project-card:hover {
+    box-shadow: inset 0 0 25px var(--hover-shadow);
 }
 
-.project-card:nth-child(3) {
-    background-color: #F1F1F1;
-}
-
-.project-card:nth-child(4) {
-    background-color: #ECF3FF;
-}
-
-.project-card:nth-child(5) {
-    background-color: #F0E8FF;
-}
+.project-card:nth-child(1) { background-color: var(--project-card-bg); }
+.project-card:nth-child(2) { background-color: var(--project-card-bg-2); }
+.project-card:nth-child(3) { background-color: var(--project-card-bg-3); }
+.project-card:nth-child(4) { background-color: var(--project-card-bg-4); }
+.project-card:nth-child(5) { background-color: var(--project-card-bg-5); }
 
 .project-image {
     width: 455px;
@@ -187,7 +282,7 @@ main {
 }
 
 .project-content h2 {
-    color: #2A2A2A;
+    color: var(--subheading-color);
     font-size: 36px;
     font-weight: 500;
 }
@@ -196,23 +291,23 @@ main {
     margin-top: 20px;
     font-size: 24px;
     font-weight: 500;
-    color: #696969;
+    color: var(--text-color);
 }
 
 .project-description {
     margin-top: 36px;
     font-size: 16px;
     font-weight: 300;
-    color: #696969;
+    color: var(--text-color);
 }
 
 .project-details {
     position: absolute;
-    margin-top: 15px; /* Just added now to lift details*/
+    margin-top: 15px;
     bottom: 70px;
-    left: 60px; /* Added this */
+    left: 60px;
     display: flex;
-    gap: 60px; /* this was 180*/
+    gap: 60px;
 }
 
 .detail-group {
@@ -220,32 +315,27 @@ main {
     flex-direction: column;
 }
 
-.detail-group:nth-child(2) {
-    position: relative; /* Allow natural flex alignment */
-    left: auto; /* Remove fixed left positioning */
-    margin-left: 0; /* Reset unnecessary margin */
-    width: auto; /* Adjust width to content */
-}
-
 .detail-label {
     font-size: 16px;
     font-weight: 400;
+    color: var(--text-color);
 }
 
 .detail-value {
-    margin-top: 15px; /* 35*/
+    margin-top: 15px;
     font-size: 24px;
     font-weight: 500;
+    color: var(--text-color);
 }
 
 .view-project-btn {
     position: absolute;
     bottom: 70px;
-    left: 550px; /* Changed from right to left */
+    left: 550px;
     width: 145px;
     height: 68px;
-    background-color: #2A2A2A;
-    color: #FFFFFF;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -258,16 +348,24 @@ main {
 
 .view-project-btn:hover {
     transform: translateY(-5px);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 15px var(--hover-shadow);
+}
+
+body.dark-mode .view-project-btn {
+    box-shadow: none;
+}
+
+body.dark-mode .view-project-btn:hover {
+    box-shadow: inset 0 0 15px var(--hover-shadow);
 }
 
 .more-works {
     width: 580px;
     height: 320px;
     margin: 90px auto;
-    background-color: white;
+    background-color: var(--more-works-bg);
     border-radius: 50px;
-    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 15px var(--shadow-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -278,27 +376,28 @@ main {
 
 .more-works:hover {
     transform: translateY(-5px);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 15px var(--hover-shadow);
+}
+
+body.dark-mode .more-works {
+    box-shadow:inset  0 0 15px var(--shadow-color);
+}
+
+body.dark-mode .more-works:hover {
+    box-shadow: inset 0 0 25px var(--hover-shadow);
 }
 
 .more-works h2 {
     margin-top: 120px;
     font-size: 24px;
     font-weight: 500;
-    color: #696969;
+    color: var(--text-color);
 }
 
-/* For the right arrow in More Works section */
 @keyframes bounceRight {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    50% {
-        transform: translateX(10px);
-    }
-    75% {
-        transform: translateX(-3px);
-    }
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-3px); }
 }
 
 .arrow-right {
@@ -308,17 +407,16 @@ main {
 
 .arrow-down:hover, .arrow-right:hover {
     animation-play-state: paused;
-} /*pause animation on hover*/
+}
 
-/* CSS Styles */
 .about {
-    background-color: #363636;
+    background-color: var(--about-bg);
     padding: 10px 0;
     text-align: center;
 }
 
 .about h2 {
-    color: #FFFFFF;
+    color: var(--about-text);
     font-size: 36px;
     font-weight: 300;
     margin-bottom: 60px;
@@ -334,12 +432,11 @@ main {
 
 .quote {
     margin-top: 60px;
-    color: #FFFFFF;
+    color: var(--about-text);
     font-size: 24px;
     font-weight: 300;
 }
 
-/* New container for social links */
 .social-container {
     width: 100%;
     margin-top: 75px;
@@ -349,14 +446,14 @@ main {
     display: flex;
     justify-content: center;
     gap: 40px;
-    flex-wrap: wrap; /* Added for responsiveness */
-    max-width: 800px; /* Maximum width to maintain layout */
-    margin: 0 auto; /* Center the container */
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .social-link {
     text-decoration: none;
-    color: #FFFFFF;
+    color: var(--about-text);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -376,21 +473,20 @@ main {
 }
 
 .social-link:hover .social-icon {
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 15px var(--hover-shadow);
 }
 
 .social-link span {
     font-size: 13px;
     font-weight: 300;
     font-family: 'Poppins', sans-serif;
-    color: #FFFFFF;
+    color: var(--about-text);
 }
 
-/* Footer styles */
 .footer-content {
     width: 100%;
     margin-top: 90px;
-    padding: 0 20px; /* Added padding for mobile */
+    padding: 0 20px;
     box-sizing: border-box;
 }
 
@@ -398,7 +494,7 @@ main {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: 600;
-    color: #FFFFFF;
+    color: var(--about-text);
     display: block;
     margin-bottom: 30px;
 }
@@ -407,7 +503,195 @@ main {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: 300;
-    color: #FFFFFF;
+    color: var(--about-text);
     display: block;
-    padding-bottom: 70px; /* Changed from margin to padding */
+    padding-bottom: 70px;
+}
+
+/* Mobile Responsive Styles (below 768px) */
+@media screen and (max-width: 768px) {
+    .logo {
+        top: 5px; /* Slightly reduced for mobile */
+        left: 5px; /* Reduced margin */
+        width: 40px;
+        height: 40px;
+    }
+
+    .night-mode-toggle {
+        top: 5px; /* Slightly reduced for mobile */
+        right: 5px; /* Reduced margin */
+    }
+
+    .night-mode-toggle label {
+        width: 40px;
+        height: 40px;
+    }
+
+    main {
+        padding: 0 20px;
+    }
+
+    .navbar {
+        gap: 40px;
+        padding: 15px 20px;
+        width: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .navbar a {
+        font-size: 12px;
+    }
+
+    .hero-section {
+        margin-top: 200px;
+    }
+
+    .hero-section h1 {
+        font-size: 28px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+        padding: 0 20px;
+        margin: 80px auto 0;
+    }
+
+    .scroll-indicator {
+        margin: 120px auto 0;
+    }
+
+    .projects {
+        margin-top: 120px;
+    }
+
+    .project-card {
+        width: 100%;
+        height: auto;
+        padding: 30px;
+        flex-direction: column;
+        margin: 0 auto 120px;
+    }
+
+    .project-image {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+    }
+
+    .project-content {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 30px;
+    }
+
+    .project-content h2 {
+        font-size: 24px;
+    }
+
+    .project-content h3 {
+        font-size: 18px;
+        margin-top: 15px;
+    }
+
+    .project-description {
+        font-size: 12px;
+        margin-top: 40px;
+    }
+
+    .project-details {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin-top: 20px;
+        gap: 40px;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .detail-group {
+        margin-bottom: 10px;
+    }
+
+    .detail-label {
+        font-size: 12px;
+    }
+
+    .detail-value {
+        font-size: 18px;
+        margin-top: 5px; /* Adjustable margin below timeline */
+    }
+
+    .view-project-btn {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        width: 100px;
+        height: 40px;
+        font-size: 12px;
+        margin-top: 20px;
+    }
+
+    .more-works {
+        width: 90%;
+        height: 250px;
+        margin: 120px auto;
+    }
+
+    .more-works h2 {
+        margin-top: 90px;
+        font-size: 18px;
+    }
+
+    .about {
+        padding: 20px 0;
+    }
+
+    .about h2 {
+        font-size: 24px;
+        margin-bottom: 40px;
+    }
+
+    .profile-image {
+        width: 200px;
+        height: 200px;
+    }
+
+    .quote {
+        font-size: 16px;
+        padding: 0 20px;
+        margin-top: 40px;
+    }
+
+    .social-container {
+        margin-top: 50px;
+    }
+
+    .social-links {
+        gap: 25px;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .social-link span {
+        font-size: 11px;
+    }
+
+    .footer-content {
+        margin-top: 80px;
+        padding: 0 20px;
+    }
+
+    .footer-content .name,
+    .footer-content .copyright {
+        font-size: 12px;
+    }
+
+    .footer-content .name {
+        margin-bottom: 20px;
+    }
 }
