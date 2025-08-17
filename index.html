@@ -1,488 +1,616 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhiram N S</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abhiram N S</title>
+
+  <!-- Google Fonts: Sansation (Light 300, Regular 400, Bold 700) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+  <!-- If this URL differs for Sansation in your setup, replace it with the correct one -->
+
+  <!-- Adobe Fonts: Splash (replace XXXXXXX with your kit ID) -->
+  <link rel="stylesheet" href="https://use.typekit.net/hex5uwz.css">
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
-<div class="animation-container">
-  <svg id="animationSvg" preserveAspectRatio="none">
-    <path id="animTriangle" class="shape" />
-    <circle id="animCircle" class="shape" r="20" />
-  </svg>
-</div>
-
-<style>
-.animation-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1000;
-}
-
-#animationSvg {
-  width: 100%;
-  height: 100%;
-}
-
-.shape {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-#animCircle {
-  fill: #0004FF;
-}
-
-#animTriangle {
-  fill: #FF0000;
-}
-</style>
-
-<script>
-class AnimationController {
-  constructor() {
-    this.circle = document.getElementById('animCircle');
-    this.triangle = document.getElementById('animTriangle');
-    this.isAnimating = false;
-    
-    // Animation settings
-    this.circleRadius = 10;
-    this.triangleSize = 20;
-    this.animationDuration = 2000;
-    this.minGap = 80;
-    this.maxGap = 200;
-    this.lastScrollPosition = window.scrollY;
-    this.lastAnimationTime = 0;
-    
-    // Speed settings
-    this.circleSpeed = 1.0;
-    this.triangleSpeed = 0.7;
-    
-    this.init();
-  }
-  
-  init() {
-    // Trigger initial animation after 5 seconds
-    setTimeout(() => {
-      this.animate('normal');
-    }, 5000);
-
-      // Trigger second animation at 11 seconds
-    setTimeout(() => {
-      if (!this.isAnimating) {
-        this.animate('normal');
-        this.hasPlayed11s = true;
-      } else {
-        // If currently animating, wait and try again
-        const checkAndAnimate = () => {
-          if (!this.isAnimating && !this.hasPlayed60s) {
-            this.animate('normal');
-            this.hasPlayed11s = true;
-          } else if (!this.hasPlayed11s) {
-            setTimeout(checkAndAnimate, 100);
-          }
-        };
-        setTimeout(checkAndAnimate, 100);
-      }
-    }, 11000);
-      
-      // Trigger second animation at 60 seconds
-    setTimeout(() => {
-      if (!this.isAnimating) {
-        this.animate('normal');
-        this.hasPlayed60s = true;
-      } else {
-        // If currently animating, wait and try again
-        const checkAndAnimate = () => {
-          if (!this.isAnimating && !this.hasPlayed60s) {
-            this.animate('normal');
-            this.hasPlayed60s = true;
-          } else if (!this.hasPlayed60s) {
-            setTimeout(checkAndAnimate, 100);
-          }
-        };
-        setTimeout(checkAndAnimate, 100);
-      }
-    }, 60000);
-
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-      if (scrollTimeout) {
-        window.cancelAnimationFrame(scrollTimeout);
-      }
-      scrollTimeout = window.requestAnimationFrame(() => {
-        this.handleScroll();
-      });
-    });
-  }
-  
-  handleScroll() {
-    const currentScroll = window.scrollY;
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const now = Date.now();
-    
-    if (now - this.lastAnimationTime >= 5000) {
-      if (
-        (currentScroll <= 0 && this.lastScrollPosition > currentScroll) ||
-        (currentScroll >= maxScroll && this.lastScrollPosition < currentScroll)
-      ) {
-        this.lastAnimationTime = now;
-        this.animate('normal');
-      }
-    }
-    
-    this.lastScrollPosition = currentScroll;
-  }
-
-  generatePath(type = 'normal') {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    
-    // Always get random edge points for start and end
-    const startPoint = this.getEdgePoint();
-    const endPoint = this.getEdgePoint(true);
-    
-    // Control points for smooth curve
-    const centerX = width / 2;
-    const centerY = height / 2;
-    
-    return {
-      start: startPoint,
-      end: endPoint,
-      control1: {
-        x: centerX + (Math.random() - 0.5) * width * 0.3,
-        y: centerY + (Math.random() - 0.5) * height * 0.3
-      },
-      control2: {
-        x: centerX + (Math.random() - 0.5) * width * 0.3,
-        y: centerY + (Math.random() - 0.5) * height * 0.3
-      }
-    };
-  }
-  
-  getEdgePoint(opposite = false) {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const side = opposite ? (this.startSide + 2) % 4 : Math.floor(Math.random() * 4);
-    this.startSide = side;
-    
-    switch(side) {
-      case 0: return { x: -50, y: height * Math.random() }; // Left
-      case 1: return { x: width + 50, y: height * Math.random() }; // Right
-      case 2: return { x: width * Math.random(), y: -50 }; // Top
-      case 3: return { x: width * Math.random(), y: height + 50 }; // Bottom
-    }
-  }
-  
-  getBezierPoint(t, p0, p1, p2, p3) {
-    const oneMinusT = 1 - t;
-    return {
-      x: Math.pow(oneMinusT, 3) * p0.x +
-         3 * Math.pow(oneMinusT, 2) * t * p1.x +
-         3 * oneMinusT * Math.pow(t, 2) * p2.x +
-         Math.pow(t, 3) * p3.x,
-      y: Math.pow(oneMinusT, 3) * p0.y +
-         3 * Math.pow(oneMinusT, 2) * t * p1.y +
-         3 * oneMinusT * Math.pow(t, 2) * p2.y +
-         Math.pow(t, 3) * p3.y
-    };
-  }
-  
-  updateTrianglePosition(x, y, prevX, prevY) {
-    const angle = Math.atan2(y - prevY, x - prevX);
-    const size = this.triangleSize;
-    
-    const points = [
-      { x: -size, y: -size/2 },
-      { x: -size, y: size/2 },
-      { x: size, y: 0 }
-    ];
-    
-    const rotatedPoints = points.map(p => ({
-      x: x - this.minGap * Math.cos(angle) + (p.x * Math.cos(angle) - p.y * Math.sin(angle)),
-      y: y - this.minGap * Math.sin(angle) + (p.x * Math.sin(angle) + p.y * Math.cos(angle))
-    }));
-    
-    this.triangle.setAttribute('d', `
-      M ${rotatedPoints[0].x},${rotatedPoints[0].y}
-      L ${rotatedPoints[1].x},${rotatedPoints[1].y}
-      L ${rotatedPoints[2].x},${rotatedPoints[2].y}
-      Z
-    `);
-  }
-  
-  animate(pathType = 'normal') {
-    if (this.isAnimating) return;
-    
-    this.isAnimating = true;
-    const path = this.generatePath(pathType);
-    const startTime = performance.now();
-    let prevX = path.start.x;
-    let prevY = path.start.y;
-    
-    this.circle.style.opacity = 1;
-    this.triangle.style.opacity = 1;
-    
-    const animate = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      
-      let circleProgress = (elapsed / this.animationDuration) * this.circleSpeed;
-      let triangleProgress = (elapsed / this.animationDuration) * this.triangleSpeed;
-      
-      if (circleProgress >= 1 && triangleProgress >= 1) {
-        this.isAnimating = false;
-        this.circle.style.opacity = 0;
-        this.triangle.style.opacity = 0;
-        return;
-      }
-      
-      if (triangleProgress < 1) {
-        const trianglePos = this.getBezierPoint(
-          Math.min(triangleProgress, 1),
-          path.start,
-          path.control1,
-          path.control2,
-          path.end
-        );
-        this.updateTrianglePosition(trianglePos.x, trianglePos.y, prevX, prevY);
-        prevX = trianglePos.x;
-        prevY = trianglePos.y;
-      }
-      
-      if (circleProgress < 1) {
-        const circlePos = this.getBezierPoint(
-          Math.min(circleProgress, 1),
-          path.start,
-          path.control1,
-          path.control2,
-          path.end
-        );
-        this.circle.setAttribute('cx', circlePos.x);
-        this.circle.setAttribute('cy', circlePos.y);
-      }
-      
-      requestAnimationFrame(animate);
-    };
-    
-    requestAnimationFrame(animate);
-  }
-}
-
-window.addEventListener('load', () => {
-  const animator = new AnimationController();
-});
-</script>
-
 
 <body>
 
-    <div class="header-container">
-    <img src="logo-day.png" alt="Day Logo" class="logo day">
-    <img src="logo-night.png" alt="Night Logo" class="logo night">
-    <div class="night-mode-toggle">
-        <input type="checkbox" id="night-mode-toggle">
-        <label for="night-mode-toggle"></label>
-    </div>
-        
-    <nav class="navbar">
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="https://drive.google.com/file/d/169ZZR1uTuAt_i1yxt68OwHRhbPYs2HLa/view?usp=sharing" target="_blank">Resume</a>
-</div>
-        
-</nav>
-    <main>
-        <div class="hero-section">
-            <h1><span class="light">Hi, I am</span> <span class="name">Abhiram</span></h1>
-            <p class="hero-description">I design intuitive experiences that seamlessly connect user needs with the magic of technology, driven by curiosity and a passion for innovation</p>
 
-        
-    <div class="scroll-indicator">
-        <div class="hover-circle"></div>
-        <svg class="arrow-down" width="20" height="40" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 2L20 38M20 38L38 20M20 38L2 20" stroke="#CDCDCD" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  
+<div class="animation-container" aria-hidden="true">
+    <svg id="animationSvg" preserveAspectRatio="none">
+      <path id="animTriangle" class="shape" />
+      <circle id="animCircle" class="shape" r="20" />
+    </svg>
+  </div>
+  <!-- Animation container (kept for future interactive BG; safe z-index via CSS) -->
+
+  
+
+  <!-- Navbar -->
+  <nav class="navbar" data-behavior="hide-on-scroll">
+    <a href="#publications">WORK</a>
+    <a href="#about">ABOUT</a>
+    <a href="https://drive.google.com/file/d/169ZZR1uTuAt_i1yxt68OwHRhbPYs2HLa/view" target="_blank" rel="noopener">RESUME</a>
+  </nav>
+
+  <main>
+
+    <!-- Hero Section -->
+    <header class="hero-section" id="top">
+      <canvas id="bg"></canvas>  <!-- New: Interactive background canvas -->
+
+      <!-- PNG heading (Papyrus-rendered image) -->
+      <!-- Replace src with your exported PNG for “Hi I am Abhiram N S” -->
+      <img src="heading-papyrus.png" alt="Hi I am Abhiram N S" class="hero-heading-image" />
+
+      <!-- Summary text (Sansation Light) -->
+      <p class="hero-description">
+        I design intuitive experiences that seamlessly connect user needs with the magic of technology, driven by curiosity and a passion for innovation
+      </p>
+
+      <!-- Scroll-down circular button -->
+      <button class="scroll-indicator" aria-label="Scroll to publications" data-target="#publications">
+        <span class="hover-circle" aria-hidden="true"></span>
+        <svg class="arrow-down" width="20" height="40" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M20 2L20 38M20 38L38 20M20 38L2 20" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-    </div>
-            <script>
-    document.querySelector('.scroll-indicator').addEventListener('click', function() {
-        document.querySelector('#work').scrollIntoView({ 
-            behavior: 'smooth'
-        });
-    });
-</script>
+      </button>
+    </header>
 
+    <!-- Publications -->
+    <section id="publications" class="publications-section" aria-labelledby="pub-title">
+      <h2 id="pub-title" class="section-title">PUBLICATIONS</h2>
 
+      <!-- Publication Card 1 -->
+      <a class="pub-card" href="https://drive.google.com/file/d/1GoOixHdh3Bh056MpQ_pkeDMDv08XLo0d/view?usp=sharing" target="_blank" rel="noopener">
+        <div class="pub-card-content">
+          <h3 class="pub-title">
+            <span class="pub-title-regular">INTERACT&nbsp;25&nbsp;&mdash;&nbsp;</span>
+            <span class="pub-title-light">Gesture-Based Drone Swarm Control in Virtual Reality</span>
+          </h3>
         </div>
-
-        <section class="projects">
-            <section id="work" class="projects">
-            <article class="project-card">
-                <div class="project-image-container">
-                    <img src="Grama.png" alt="Grama Project" class="project-image">
-                </div>
-                <div class="project-content">
-                    <h2>Grama</h2>
-                    <h3>A one stop for rural retail</h3>
-                    <p class="project-description">Grama is a system design project developed through interviews with rural stakeholders to understand their challenges. It connects shopkeepers, customers, suppliers, and delivery agents through a unified platform, addressing inventory management, pricing transparency, and credit systems. Grama fosters trust, enhances efficiency, and strengthens community bonds in rural India.</p>
-                    <div class="project-details">
-                        <div class="detail-group">
-                            <span class="detail-label">Duration:</span>
-                            <span class="detail-value">4 months</span>
-                        </div>
-                        <div class="detail-group">
-                            <span class="detail-label">Project type:</span>
-                            <span class="detail-value">Graduation Project</span>
-                        </div>
-                    </div>
-                    <a href="https://www.behance.net/gallery/213171205/Redefining-Rural-Retail-Through-System-Design" class="view-project-btn">View Project</a>
-                </div>
-            </article>
-
-
-             <article class="project-card">
-                <div class="project-image-container">
-                    <img src="anva.png" alt="Anva Project" class="project-image">
-                </div>
-                <div class="project-content">
-                    <h2>Anva</h2>
-                    <h3>Gesture-Based Swarm Robot Control in VR</h3>
-                    <p class="project-description">
-Gesture-Based Swarm Control in VR leverages natural gestures to control aerial swarm robots in high-stakes scenarios like search-and-rescue. A user study identified preferred gestures, leading to a Unity-based prototype that enhances human-swarm interaction, paving the way for future innovations.</p>
-                    <div class="project-details">
-                        <div class="detail-group">
-                            <span class="detail-label">Duration:</span>
-                            <span class="detail-value">4 months</span>
-                        </div>
-                        <div class="detail-group">
-                            <span class="detail-label">Project type:</span>
-                            <span class="detail-value">Academic - Individual</span>
-                        </div>
-                    </div>
-                    <a href="https://www.behance.net/gallery/215053903/Gesture-Based-Swarm-Robot-Control-in-VR" class="view-project-btn">View Project</a>
-                </div>
-            </article>
-
-            <article class="project-card">
-                <div class="project-image-container">
-                    <img src="chordex.png" alt="Chordex Project" class="project-image">
-                </div>
-                <div class="project-content">
-                    <h2>Chordex</h2>
-                    <h3>A wearable chorded keyboard for Indian Languages</h3>
-                    <p class="project-description">Chordex is a wearable chorded keyboard designed for Indian languages, optimized and tested for Malayalam. It achieved an impressive typing speed of 85 CMP and was proudly presented at IndiaHCI 2024 following its acceptance.</p>
-                    <div class="project-details">
-                        <div class="detail-group">
-                            <span class="detail-label">Duration:</span>
-                            <span class="detail-value">4 months</span>
-                        </div>
-                        <div class="detail-group">
-                            <span class="detail-label">Project type:</span>
-                            <span class="detail-value">Academic - Individual</span>
-                        </div>
-                    </div>
-                    <a href="https://www.behance.net/gallery/213288693/Wearable-Chorded-Keyboard-for-Malayalam" class="view-project-btn">View Project</a>
-                </div>
-            </article>
-
-                 <article class="project-card">
-                <div class="project-image-container">
-                    <img src="gpay.png" alt="Gpay Plugin Project" class="project-image">
-                </div>
-                <div class="project-content">
-                    <h2>Gpay Plugin</h2>
-                    <h3>Personal Accounting Plugin for Google Pay</h3>
-                    <p class="project-description">
-Personal Accounting Plugin is a design concept tailored for seamless home accounting. Integrated into the application, it automates tracking expenses and income, offering real-time visualizations that are analyzable, comparable, and exportable. Users can plan future expenses, set monthly limits, and monitor updates in real-time, simplifying financial management.</p>
-                    <div class="project-details">
-                        <div class="detail-group">
-                            <span class="detail-label">Duration:</span>
-                            <span class="detail-value">3 Weeks</span>
-                        </div>
-                        <div class="detail-group">
-                            <span class="detail-label">Project type:</span>
-                            <span class="detail-value">Academic - Group</span>
-                        </div>
-                    </div>
-                    <a href="https://www.behance.net/gallery/153731849/PERSONAL-ACCOUNTING-PLUGIN-FOR-GOOGLE-PAY" class="view-project-btn">View Project</a>
-                </div>
-            </article>
-
-                <article class="project-card">
-                <div class="project-image-container">
-                    <img src="kahaani.png" alt="Kahaani Project" class="project-image">
-                </div>
-                <div class="project-content">
-                    <h2>Kahaani</h2>
-                    <h3>Social Awareness and Marketplace for Dharavi</h3>
-                    <p class="project-description">
-An online Marketplace, Community and Awareness program to support the small scale industries and independent artisans of Dharavi, one of the largest 'slums' in the world to help them earn the true amount they deserve and reimagine Dharavi as a key thriving industrial hub and an intersection of culture and skill.</p>
-                    <div class="project-details">
-                        <div class="detail-group">
-                            <span class="detail-label">Duration:</span>
-                            <span class="detail-value">3 Weeks</span>
-                        </div>
-                        <div class="detail-group">
-                            <span class="detail-label">Project type:</span>
-                            <span class="detail-value">Academic - Group</span>
-                        </div>
-                    </div>
-                    <a href="https://www.behance.net/gallery/183359017/kahaani-Social-awareness-and-Marketplace-for-Dharavi" class="view-project-btn">View Project</a>
-                </div>
-            </article>
-
-            <a href="https://www.behance.net/abhiramns" class="more-works">
-    <h2>More Works</h2>
-    <svg class="arrow-right" width="40" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2 20L38 20M38 20L20 2M38 20L20 38" stroke="#CDCDCD" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-</a>
-        </section>
-
-       <section class="about">
-    <section id="about" class="projects">
-        <h2>About</h2>
-        <img src="yourphoto.jpg" alt="Profile" class="profile-image">
-        <p class="quote">Just a wonderer wandering around</p>
-        
-        <!-- Social links wrapper -->
-        <div class="social-container">
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/abhiram-n-s/" target="_blank" class="social-link">
-                    <img src="linkeding.png" alt="LinkedIn" class="social-icon">
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://www.behance.net/abhiramns" class="social-link">
-                    <img src="behanceg.png" alt="Behance" class="social-icon">
-                    <span>Behance</span>
-                </a>
-                <a href="https://www.instagram.com/abhiram_n_s/" target="_blank" class="social-link">
-                    <img src="instagramg.png" alt="Instagram" class="social-icon">
-                    <span>Instagram</span>
-                </a>
-            </div>
+        <div class="pub-card-icon" aria-hidden="true">
+          <!-- Link icon -->
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h5V3H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z"/>
+          </svg>
         </div>
-        
-        <!-- Separate footer section -->
-        <footer class="footer-content">
-            <span class="name">Abhiram N S</span>
-            <span class="copyright">© 2024. All rights reserved</span>
-        </footer>
+      </a>
+
+      <!-- Publication Card 2 -->
+      <a class="pub-card" href="https://link.springer.com/chapter/10.1007/978-3-031-80832-6_11" target="_blank" rel="noopener">
+        <div class="pub-card-content">
+          <h3 class="pub-title">
+            <span class="pub-title-regular">IndiaHCI&nbsp;2024&nbsp;&mdash;&nbsp;</span>
+            <span class="pub-title-light">Chordex: A Wearable Chorded Keyboard for Malayalam</span>
+          </h3>
+        </div>
+        <div class="pub-card-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h5V3H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- dotted divider -->
+      <hr class="dotted-divider" />
     </section>
-</section>
-    </main>
 
-    <script>
-    document.getElementById('night-mode-toggle').addEventListener('change', function() {
-        document.body.classList.toggle('dark-mode');
+    <!-- Projects -->
+    <section id="projects" class="projects-wrap" aria-labelledby="projects-title">
+      <h2 id="projects-title" class="section-title">PROJECTS</h2>
+
+      <!-- Project 1: Image Left, Content Right -->
+      <article class="project-row project-left">
+        <div class="project-bg" aria-hidden="true"></div>
+        <div class="project-media">
+          <img src="ANVAt.png" alt="Gesture-Based Swarm Control in VR" class="project-image"/>
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">Gesture-Based Swarm Control in VR</h3>
+          <p class="project-text">
+            Gesture-Based Swarm Control in VR leverages natural gestures to control aerial swarm robots in high-stakes scenarios like search-and-rescue. A user study identified preferred gestures, leading to a Unity-based prototype that enhances human-swarm interaction.
+          </p>
+          <a href="https://www.behance.net/gallery/215053903/Gesture-Based-Swarm-Robot-Control-in-VR" class="project-btn" target="_blank" rel="noopener">View Project</a>
+        </div>
+      </article>
+
+      <!-- Project 2: Image Right, Content Left -->
+      <article class="project-row project-right">
+        <div class="project-bg" aria-hidden="true"></div>
+        <div class="project-media">
+          <img src="ChordexT.png" alt="A Wearable Chorded Keyboard" class="project-image"/>
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">A Wearable Chorded Keyboard</h3>
+          <p class="project-text">
+            Chordex is a wearable chorded keyboard designed for Indian languages, optimized and tested for Malayalam. It achieved an impressive typing speed of 85 CMP and was presented at IndiaHCI 2024 following its acceptance.
+          </p>
+          <a href="https://www.behance.net/gallery/213288693/Wearable-Chorded-Keyboard-for-Malayalam" class="project-btn" target="_blank" rel="noopener">View Project</a>
+        </div>
+      </article>
+
+      <!-- Project 3: Image Left, Content Right -->
+      <article class="project-row project-left">
+        <div class="project-bg" aria-hidden="true"></div>
+        <div class="project-media">
+          <img src="GramaT.png" alt="A One Stop for Rural Retail" class="project-image"/>
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">A One Stop for Rural Retail</h3>
+          <p class="project-text">
+            Grama is a system design project empowering rural commerce by connecting shopkeepers, customers, suppliers, and delivery agents. It streamlines inventory, pricing, and credit systems, fostering trust, efficiency, and community bonds in rural India.
+          </p>
+          <a href="https://www.behance.net/gallery/213171205/Redefining-Rural-Retail-Through-System-Design" class="project-btn" target="_blank" rel="noopener">View Project</a>
+        </div>
+      </article>
+
+      <!-- More Works -->
+      <a href="https://www.behance.net/abhiramns" class="more-works" target="_blank" rel="noopener">
+        <h3 class="more-works-title">MORE WORK</h3>
+        <div class="arrow-right-wrap" aria-hidden="true">
+          <svg class="arrow-right" width="40" height="20" viewBox="0 0 40 40">
+            <path d="M2 20L38 20M38 20L20 2M38 20L20 38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- dotted divider -->
+      <hr class="dotted-divider" />
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about" aria-labelledby="about-title">
+      <div class="about-main">
+        <!-- Profile Image Container -->
+        <div class="profile-container">
+          <div class="profile-frame"></div>
+          <img src="yourphoto.jpg" alt="Abhiram N S Profile Picture" class="profile-image"/>
+        </div>
+        
+        <!-- About Content -->
+        <div class="about-content">
+          <h2 id="about-title" class="hello-world">HELLO WORLD</h2>
+          <p class="about-text">
+            A curious mind and a hands-on creator, I love blending creativity, empathy, and a bit of playfulness to make experiences that feel simple, meaningful, and a little magical.
+            <br><br>
+            In my free time, I'm often playing football, trying new sports or musical instruments, exploring ideas through books and films, or capturing moments with my camera.
+          </p>
+        </div>
+      </div>
+
+      <div class="social-container">
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/abhiram-n-s/" target="_blank" class="social-link" rel="noopener">
+            <img src="linkeding.png" alt="LinkedIn" class="social-icon"/>
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://www.behance.net/abhiramns" target="_blank" class="social-link" rel="noopener">
+            <img src="behanceg.png" alt="Behance" class="social-icon"/>
+            <span>Behance</span>
+          </a>
+          <a href="https://www.instagram.com/abhiram_n_s/" target="_blank" class="social-link" rel="noopener">
+            <img src="instagramg.png" alt="Instagram" class="social-icon"/>
+            <span>Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="signature-wrap">
+        <!-- Replace with your name image -->
+        <img src="signature-wrap.png" alt="Abhiram N S" class="signature-image"/>
+        <p class="copyright">© 2025 All rights reserved</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Keep your animation script if used -->
+  <script src="interactive-bg.js"></script>
+
+  <!-- Navbar show/hide & scroll helpers -->
+  <script>
+    // Smooth scroll for buttons with data-target
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('[data-target]');
+      if (!trigger) return;
+      const sel = trigger.getAttribute('data-target');
+      const el = document.querySelector(sel);
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
-</script>
-    
+
+    // Hide-on-scroll navbar
+    (function () {
+      const nav = document.querySelector('.navbar[data-behavior="hide-on-scroll"]');
+      if (!nav) return;
+
+      let lastY = window.scrollY;
+      let ticking = false;
+      const threshold = 50; // Increased threshold for better detection
+
+      function onScroll() {
+        const currentY = window.scrollY;
+        
+        // At top: transparent & visible
+        if (currentY <= 50) {
+          nav.classList.remove('nav-hidden');
+          nav.classList.add('nav-top');
+        } else {
+          nav.classList.remove('nav-top');
+          
+          // Only hide/show if scroll difference is significant
+          if (Math.abs(currentY - lastY) > threshold) {
+            if (currentY > lastY && currentY > 100) {
+              // Scrolling down past 100px -> hide
+              nav.classList.add('nav-hidden');
+            } else if (currentY < lastY) {
+              // Scrolling up -> show
+              nav.classList.remove('nav-hidden');
+            }
+            lastY = currentY;
+          }
+        }
+        
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(onScroll);
+          ticking = true;
+        }
+      });
+
+      // Init state
+      nav.classList.add('nav-top');
+    })();
+
+    // (Optional) Minimal animation controller kept from your previous file
+    class AnimationController {
+      constructor() {
+        this.circle = document.getElementById('animCircle');
+        this.triangle = document.getElementById('animTriangle');
+        if (!this.circle || !this.triangle) return;
+        this.isAnimating = false;
+        this.circleRadius = 10;
+        this.triangleSize = 20;
+        this.animationDuration = 2000;
+        this.minGap = 80;
+        this.circleSpeed = 1.0;
+        this.triangleSpeed = 0.7;
+        this.lastScrollPosition = window.scrollY;
+        this.lastAnimationTime = 0;
+        this.init();
+      }
+      init() {
+        setTimeout(() => this.animate('normal'), 5000);
+        setTimeout(() => { if (!this.isAnimating) this.animate('normal'); }, 60000);
+      }
+      generatePath() {
+        const width = window.innerWidth, height = window.innerHeight;
+        const startPoint = this.getEdgePoint();
+        const endPoint = this.getEdgePoint(true);
+        const centerX = width / 2, centerY = height / 2;
+        return {
+          start: startPoint,
+          end: endPoint,
+          control1: { x: centerX + (Math.random()-0.5)*width*0.3, y: centerY + (Math.random()-0.5)*height*0.3 },
+          control2: { x: centerX + (Math.random()-0.5)*width*0.3, y: centerY + (Math.random()-0.5)*height*0.3 }
+        };
+      }
+      getEdgePoint(opposite = false) {
+        const w = window.innerWidth, h = window.innerHeight;
+        const side = opposite ? (this.startSide + 2) % 4 : Math.floor(Math.random() * 4);
+        this.startSide = side;
+        switch (side) {
+          case 0: return { x: -50, y: h * Math.random() };
+          case 1: return { x: w + 50, y: h * Math.random() };
+          case 2: return { x: w * Math.random(), y: -50 };
+          default: return { x: w * Math.random(), y: h + 50 };
+        }
+      }
+      getBezierPoint(t, p0, p1, p2, p3) {
+        const u = 1 - t;
+        return {
+          x: u*u*u*p0.x + 3*u*u*t*p1.x + 3*u*t*t*p2.x + t*t*t*p3.x,
+          y: u*u*u*p0.y + 3*u*u*t*p1.y + 3*u*t*t*p2.y + t*t*t*p3.y
+        };
+      }
+      updateTrianglePosition(x, y, prevX, prevY) {
+        const angle = Math.atan2(y - prevY, x - prevX);
+        const size = this.triangleSize;
+        const points = [{x:-size,y:-size/2},{x:-size,y:size/2},{x:size,y:0}];
+        const rp = points.map(p => ({
+          x: x - this.minGap * Math.cos(angle) + (p.x * Math.cos(angle) - p.y * Math.sin(angle)),
+          y: y - this.minGap * Math.sin(angle) + (p.x * Math.sin(angle) + p.y * Math.cos(angle))
+        }));
+        this.triangle.setAttribute('d', `M ${rp[0].x},${rp[0].y} L ${rp[1].x},${rp[1].y} L ${rp[2].x},${rp[2].y} Z`);
+      }
+      animate() {
+        if (this.isAnimating) return;
+        this.isAnimating = true;
+        const path = this.generatePath();
+        const startTime = performance.now();
+        let prevX = path.start.x, prevY = path.start.y;
+        this.circle.style.opacity = 1;
+        this.triangle.style.opacity = 1;
+
+        const step = (now) => {
+          const elapsed = now - startTime;
+          let cp = (elapsed / this.animationDuration) * this.circleSpeed;
+          let tp = (elapsed / this.animationDuration) * this.triangleSpeed;
+          if (cp >= 1 && tp >= 1) {
+            this.isAnimating = false;
+            this.circle.style.opacity = 0;
+            this.triangle.style.opacity = 0;
+            return;
+          }
+          if (tp < 1) {
+            const tpos = this.getBezierPoint(Math.min(tp,1), path.start, path.control1, path.control2, path.end);
+            this.updateTrianglePosition(tpos.x, tpos.y, prevX, prevY);
+            prevX = tpos.x; prevY = tpos.y;
+          }
+          if (cp < 1) {
+            const cpos = this.getBezierPoint(Math.min(cp,1), path.start, path.control1, path.control2, path.end);
+            this.circle.setAttribute('cx', cpos.x);
+            this.circle.setAttribute('cy', cpos.y);
+          }
+          requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }
+    }
+    window.addEventListener('load', () => { new AnimationController(); });
+  </script>
+
+  <!-- New: Interactive background script for hero section -->
+  <script>
+    // Customizable variables for control over texture, numbers, and effects
+    const NUM_PARTICLES = 150; // Number of particles (dots/droplets); increase for denser web
+    const PARTICLE_SIZE_MIN = 1; // Min particle size
+    const PARTICLE_SIZE_MAX = 4; // Max particle size for natural variation
+    const PARTICLE_SPEED = 0.1; // Initial subtle movement speed (lower for less drift)
+    const CONNECTION_DISTANCE = 90; // Max distance for particle connections (spider web strings)
+    const MOUSE_CONNECTION_DISTANCE = 150; // Max distance for connections to cursor
+    const REPEL_DISTANCE = 180; // Radius for repelling effect
+    const REPEL_STRENGTH = 1.0; // Strength of repel (adjust for subtlety)
+    const GLOW_BLUR = 8; // Glow intensity for water droplet and light effect
+    const LINE_WIDTH = 0.5; // Thin string-like lines for web texture
+    const SPRING_STRENGTH = 0.005; // Strength of restoring force to original position (subtle)
+    const DAMPING = 0.95; // Damping factor for smooth, natural motion
+
+    // For atmosphere: add background bokeh particles (adjusted to be smaller and more integrated)
+    const NUM_BOKEH = 50; // Fewer for less disconnection
+    const BOKEH_SIZE_MIN = 3;
+    const BOKEH_SIZE_MAX = 15;
+    const BOKEH_OPACITY = 0.04; // Lower opacity for subtle integration
+    const BOKEH_SPEED = 0.05; // Very slow for ambient feel
+
+    // Variables for controlling particle density in specific areas
+    const BASE_DENSITY = 0.005;
+    const FOCUS_AREAS = [
+        {centerX: 0.15, centerY: 0.95, radius: 0.3, densityMultiplier: 1}, //bottom left
+        {centerX: 0.35, centerY: 0.85, radius: 0.3, densityMultiplier: 0.5},
+        {centerX: 0.4, centerY: 0.5, radius: 0.3, densityMultiplier: 1}, // centre
+        {centerX: 0.65, centerY: 0.55, radius: 0.4, densityMultiplier: 0.5}, // centre
+        {centerX: 0.75, centerY: 0.35, radius: 0.2, densityMultiplier: 0.5},
+        {centerX: 1.0, centerY: 0.15, radius: 0.3, densityMultiplier: 1} //topright
+    ];
+    const MAX_DENSITY_ESTIMATE = BASE_DENSITY + FOCUS_AREAS.reduce((sum, area) => sum + area.densityMultiplier, 0);
+
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    const heroSection = document.querySelector('.hero-section');
+
+    // Handle resize for hero section coverage
+    function resizeCanvas() {
+        canvas.width = heroSection.clientWidth;
+        canvas.height = heroSection.clientHeight;
+        initParticles();
+    }
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+        constructor(x, y, isBokeh = false) {
+            this.x = x;
+            this.y = y;
+            this.homeX = this.x; // Original position to return to
+            this.homeY = this.y;
+            this.vx = (Math.random() - 0.5) * (isBokeh ? BOKEH_SPEED : PARTICLE_SPEED);
+            this.vy = (Math.random() - 0.5) * (isBokeh ? BOKEH_SPEED : PARTICLE_SPEED);
+            this.size = isBokeh 
+                ? Math.random() * (BOKEH_SIZE_MAX - BOKEH_SIZE_MIN) + BOKEH_SIZE_MIN 
+                : Math.random() * (PARTICLE_SIZE_MAX - PARTICLE_SIZE_MIN) + PARTICLE_SIZE_MIN;
+            this.opacity = isBokeh 
+                ? BOKEH_OPACITY * (0.7 + Math.random() * 0.3) // Varied opacity for bokeh
+                : 0.8 + Math.random() * 0.8; // Slight variation for natural feel
+            this.isBokeh = isBokeh;
+        }
+
+        update() {
+            // Spring force to return to home position
+            const springX = (this.homeX - this.x) * SPRING_STRENGTH;
+            const springY = (this.homeY - this.y) * SPRING_STRENGTH;
+            this.vx += springX;
+            this.vy += springY;
+
+            // Damping for smooth, damped oscillation
+            this.vx *= DAMPING;
+            this.vy *= DAMPING;
+
+            // Update position
+            this.x += this.vx;
+            this.y += this.vy;
+
+            // Bounce off edges to stay on screen
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.isBokeh 
+                ? `rgba(173, 216, 230, ${this.opacity})` 
+                : `rgba(173, 216, 230, ${this.opacity})`; // Light blue with opacity
+            ctx.shadowColor = 'rgba(173, 216, 230, 0.8)'; // Glow color for light/water droplet effect
+            ctx.shadowBlur = this.isBokeh ? GLOW_BLUR * 2 : GLOW_BLUR; // Stronger blur for bokeh atmosphere
+            ctx.fill();
+            ctx.shadowBlur = 0; // Reset to avoid affecting lines
+        }
+    }
+
+    let particles = [];
+    let bokehParticles = [];
+
+    function generateParticles(array, num, isBokeh) {
+        array.length = 0; // Clear existing
+        let attempts = 0;
+        const maxAttempts = num * 100; // Safety to prevent infinite loop if misconfigured
+        while (array.length < num && attempts < maxAttempts) {
+            attempts++;
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            let density = BASE_DENSITY;
+            FOCUS_AREAS.forEach(focus => {
+                const fx = focus.centerX * canvas.width;
+                const fy = focus.centerY * canvas.height;
+                const fr = focus.radius * Math.min(canvas.width, canvas.height);
+                const dx = x - fx;
+                const dy = y - fy;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < fr) {
+                    density += focus.densityMultiplier * (1 - dist / fr); // Linear falloff for smoother density transition
+                }
+            });
+            if (Math.random() < density / MAX_DENSITY_ESTIMATE) {
+                array.push(new Particle(x, y, isBokeh));
+            }
+        }
+    }
+
+    function initParticles() {
+        generateParticles(particles, NUM_PARTICLES, false);
+        generateParticles(bokehParticles, NUM_BOKEH, true);
+    }
+
+    resizeCanvas(); // Initial setup
+
+    let mouse = { x: undefined, y: undefined };
+
+    // Mouse and touch events
+    window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+    window.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+            mouse.x = e.touches[0].clientX;
+            mouse.y = e.touches[0].clientY;
+        }
+    });
+    // Reset mouse on leave/out
+    window.addEventListener('mouseleave', () => {
+        mouse.x = undefined;
+        mouse.y = undefined;
+    });
+    window.addEventListener('touchend', () => {
+        mouse.x = undefined;
+        mouse.y = undefined;
+    });
+
+    function animate() {
+        requestAnimationFrame(animate);
+        // Radial gradient background with light center, overall darker
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const maxRadius = Math.hypot(centerX, centerY);
+        const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius);
+        gradient.addColorStop(0, '#00273A'); // Light center (relative to darker outer)
+        gradient.addColorStop(1, '#030914'); // Darker outer for overall darker feel
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Update and draw bokeh for atmosphere first (background layer)
+        bokehParticles.forEach((p) => {
+            p.update();
+            p.draw();
+        });
+
+        // Draw connections between particles (spider web effect)
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < CONNECTION_DISTANCE) {
+                    // Opacity increases as particles get closer (natural forming effect)
+                    const opacity = (1 - dist / CONNECTION_DISTANCE) * 0.5;
+                    ctx.strokeStyle = `rgba(173, 216, 230, ${opacity})`;
+                    ctx.lineWidth = LINE_WIDTH;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // Update and draw particles (foreground droplets with glow)
+        particles.forEach((p) => {
+            p.update();
+            p.draw();
+        });
+
+        // Interactions if mouse/touch is active
+        if (mouse.x !== undefined && mouse.y !== undefined) {
+            const rect = canvas.getBoundingClientRect();
+            const mouseXRel = mouse.x - rect.left;
+            const mouseYRel = mouse.y - rect.top;
+
+            // Repel particles by adding to velocity (for damped, smooth response)
+            particles.forEach((p) => {
+                const dx = p.x - mouseXRel;
+                const dy = p.y - mouseYRel;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < REPEL_DISTANCE && dist > 0) { // Avoid div by zero
+                    const angle = Math.atan2(dy, dx);
+                    const force = (1 - dist / REPEL_DISTANCE) * REPEL_STRENGTH;
+                    p.vx += Math.cos(angle) * force;
+                    p.vy += Math.sin(angle) * force;
+                }
+            });
+
+            // Temporary connections to cursor (with gradual opacity based on distance)
+            particles.forEach((p) => {
+                const dx = p.x - mouseXRel;
+                const dy = p.y - mouseYRel;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MOUSE_CONNECTION_DISTANCE) {
+                    const opacity = (1 - dist / MOUSE_CONNECTION_DISTANCE) * 0.8;
+                    ctx.strokeStyle = `rgba(173, 216, 230, ${opacity})`;
+                    ctx.lineWidth = LINE_WIDTH;
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(mouseXRel, mouseYRel);
+                    ctx.stroke();
+                }
+            });
+        }
+    }
+
+    animate();
+  </script>
+
+  
 </body>
 </html>
